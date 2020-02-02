@@ -1,10 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {HelloWorld} from './components/atoms';
 
-const App = () => (
-  <View>
-    <Text>Hello World</Text>
-  </View>
-);
-
+const App = () => <HelloWorld name="Emin Ahmadov" />;
 export default App;
