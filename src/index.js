@@ -1,6 +1,5 @@
 import React from 'react';
-import {HelloWorld} from './components/atoms';
-import LoginScreen from './scenes/login';
+import Navigator from './navigations';
 
-const App = () => <LoginScreen />;
+const App = () => <Navigator />;
 export default App;
