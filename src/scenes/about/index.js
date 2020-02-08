@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {View} from 'react-native';
+import HeaderMain from '../../components/organisms/header-main';
 
-const AboutScreen = ({navigation}) => (
-  <SafeAreaView>
-    <Text>Screen: About</Text>
-  </SafeAreaView>
+const AboutScreen = () => (
+  <View style={{height: '100%', width: '100%'}}>
+    <HeaderMain />
+  </View>
 );
 
 export default AboutScreen;
