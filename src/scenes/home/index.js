@@ -5,11 +5,18 @@ import {View} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 
 const HomeScreen = ({navigation}) => (
-  <View style={{height: '100%', width: '100%'}}>
+  <View
+    style={{
+      height: '100%',
+      width: '100%',
+      backgroundColor: '#45beff',
+    }}>
     <HeaderMain />
-    <TravelPromo />
-    <TravelPromo />
-    <TravelPromo />
+    <View style={{alignItems: 'center'}}>
+      <TravelPromo />
+      <TravelPromo />
+      <TravelPromo />
+    </View>
   </View>
 );
 

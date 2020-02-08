@@ -7,11 +7,14 @@ const userImage = require('../../assets/images/user.png');
 const TravelPromo = ({}) => (
   <View
     style={{
-      height: '20%',
-      width: '100%',
+      height: '25%',
+      width: '95%',
       flexDirection: 'row',
-      borderBottomColor: 'black',
-      borderBottomWidth: 1,
+      borderRadius: 20,
+      borderWidth: 5,
+      borderColor: '#008bdb',
+      backgroundColor: 'white',
+      marginVertical: 4,
     }}>
     <View
       style={{
