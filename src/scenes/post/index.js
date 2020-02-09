@@ -6,9 +6,9 @@ import {scaleSize} from '../../styles/mixins';
 
 const userImage = require('../../assets/images/user.png');
 
-const PostScreen = () => (
+const PostScreen = ({navigation}) => (
   <View style={{height: '100%', width: '100%', backgroundColor: '#45beff'}}>
-    <HeaderMain />
+    <HeaderMain navigation={navigation} />
     <View
       style={{
         height: '100%',
