@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Image} from 'react-native';
 import {Container, Content, Item, Input, Button, Text} from 'native-base';
+import {scaleSize} from '../../styles/mixins';
 
 const logoImage = require('../../assets/images/logo.png');
 
@@ -23,7 +24,7 @@ class LoginScreen extends Component {
         }}>
         <View
           style={{
-            height: '60%',
+            height: scaleSize(480),
             width: '100%',
             alignItems: 'center',
             justifyContent: 'space-between',
