@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image, Text} from 'react-native';
 import {Container, Content, Item, Input, Button} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
+import {scaleSize} from '../../styles/mixins';
 
 const userImage = require('../../assets/images/user.png');
 
@@ -18,7 +19,7 @@ const PostScreen = () => (
       }}>
       <View
         style={{
-          height: '50%',
+          height: scaleSize(320),
           width: '100%',
           padding: '3%',
           justifyContent: 'center',
@@ -57,6 +58,9 @@ const PostScreen = () => (
           </Item>
           <Item style={{width: '80%'}}>
             <Input placeholder="Date" />
+          </Item>
+          <Item style={{width: '80%'}}>
+            <Input placeholder="Comment" />
           </Item>
         </View>
       </View>
