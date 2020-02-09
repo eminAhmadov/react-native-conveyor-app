@@ -4,13 +4,13 @@ import {Header, Left, Body, Right, Button, Icon} from 'native-base';
 
 const HeaderMain = () => (
   <View>
-    <Header>
-      <Left>
+    <Header style={{backgroundColor: 'white'}}>
+      <Left style={{flex: 1}}>
         <Button onPress={() => {}} transparent>
           <Icon style={{color: 'orange'}} type="Entypo" name="menu" />
         </Button>
       </Left>
-      <Body>
+      <Body style={{alignItems: 'center', flex: 1}}>
         <Text
           style={{
             fontSize: 20,
@@ -21,7 +21,7 @@ const HeaderMain = () => (
           Conveyor
         </Text>
       </Body>
-      <Right>
+      <Right style={{flex: 1}}>
         <Button onPress={() => {}} transparent>
           <Icon
             style={{color: 'orange'}}
