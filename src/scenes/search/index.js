@@ -5,14 +5,14 @@ import SearchField from '../../components/organisms/search-field';
 import {ScrollView} from 'react-native-gesture-handler';
 import TravelPromo from '../../components/organisms/travel-promo';
 
-const SearchScreen = () => (
+const SearchScreen = ({navigation}) => (
   <View
     style={{
       height: '100%',
       width: '100%',
       backgroundColor: '#45beff',
     }}>
-    <HeaderMain />
+    <HeaderMain navigation={navigation} />
     <SearchField />
     <ScrollView
       style={{height: '74%'}}

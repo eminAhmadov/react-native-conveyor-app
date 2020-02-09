@@ -5,7 +5,7 @@ import {scaleSize} from '../../styles/mixins';
 
 const userImage = require('../../assets/images/user.png');
 
-const PostTravel = ({editable = true}) => (
+const PostTravel = ({children, buttonLabel}) => (
   <View
     style={{
       height: '100%',
@@ -40,30 +40,15 @@ const PostTravel = ({editable = true}) => (
         />
         <Text style={{fontSize: 20, fontWeight: '600'}}>Emin Ahmadov</Text>
       </View>
-      {editable ? (
-        <View
-          style={{
-            height: '60%',
-            width: '100%',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
-          <Item style={{width: '80%'}}>
-            <Input placeholder="From" />
-          </Item>
-          <Item style={{width: '80%'}}>
-            <Input placeholder="To" />
-          </Item>
-          <Item style={{width: '80%'}}>
-            <Input placeholder="Date" />
-          </Item>
-          <Item style={{width: '80%'}}>
-            <Input placeholder="Comment" />
-          </Item>
-        </View>
-      ) : (
-        <Text>Not Editable</Text>
-      )}
+      <View
+        style={{
+          height: '60%',
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        {children}
+      </View>
     </View>
     <View
       style={{
@@ -88,7 +73,7 @@ const PostTravel = ({editable = true}) => (
             fontSize: 20,
             color: 'white',
           }}>
-          Post
+          {buttonLabel}
         </Text>
       </Button>
     </View>

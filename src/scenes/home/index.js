@@ -11,11 +11,11 @@ const HomeScreen = ({navigation}) => (
       width: '100%',
       backgroundColor: '#45beff',
     }}>
-    <HeaderMain />
+    <HeaderMain navigation={navigation} />
     <View style={{alignItems: 'center'}}>
-      <TravelPromo />
-      <TravelPromo />
-      <TravelPromo />
+      <TravelPromo navigation={navigation} />
+      <TravelPromo navigation={navigation} />
+      <TravelPromo navigation={navigation} />
     </View>
   </View>
 );

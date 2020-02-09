@@ -5,7 +5,7 @@ import {scaleSize} from '../../styles/mixins';
 
 const userImage = require('../../assets/images/user.png');
 
-const TravelPromo = ({}) => (
+const TravelPromo = ({navigation}) => (
   <View
     style={{
       height: scaleSize(100),
@@ -50,7 +50,7 @@ const TravelPromo = ({}) => (
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <TouchableOpacity onPress={() => alert('Icon More pressed')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Travel')}>
         <Icon
           style={{fontSize: 35, color: 'orange'}}
           type="Entypo"
