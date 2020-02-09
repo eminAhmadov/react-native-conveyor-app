@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import HeaderMain from '../../components/organisms/header-main';
+import SearchField from '../../components/organisms/search-field';
 
 const SearchScreen = () => (
   <View
@@ -10,6 +11,7 @@ const SearchScreen = () => (
       backgroundColor: '#45beff',
     }}>
     <HeaderMain />
+    <SearchField />
   </View>
 );
 
