@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {Header, Left, Body, Right, Button, Icon} from 'native-base';
 
 const HeaderMain = () => (
-  <View>
+  <View style={{zIndex: 30}}>
     <Header style={{backgroundColor: 'white'}}>
       <Left style={{flex: 1}}>
         <Button onPress={() => {}} transparent>

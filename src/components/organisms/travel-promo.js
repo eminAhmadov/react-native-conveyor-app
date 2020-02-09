@@ -1,13 +1,14 @@
 import React from 'react';
 import {Text, Image, TouchableOpacity} from 'react-native';
 import {View, Icon} from 'native-base';
+import {scaleSize} from '../../styles/mixins';
 
 const userImage = require('../../assets/images/user.png');
 
 const TravelPromo = ({}) => (
   <View
     style={{
-      height: '25%',
+      height: scaleSize(100),
       width: '95%',
       flexDirection: 'row',
       borderRadius: 20,
