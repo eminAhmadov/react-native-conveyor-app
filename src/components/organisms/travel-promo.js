@@ -21,7 +21,6 @@ export default class TravelPromo extends React.PureComponent {
           borderColor: '#008bdb',
           backgroundColor: 'white',
           marginVertical: 4,
-          alignItems: 'center',
         }}>
         <View
           style={{
@@ -81,12 +80,53 @@ export default class TravelPromo extends React.PureComponent {
           </View>
         </View>
         {showDetails && (
-          <View>
-            <Text>SMTH</Text>
-            <Text>SMTH</Text>
-            <Text>SMTH</Text>
-            <Text>SMTH</Text>
-            <Text>SMTH</Text>
+          <View style={{width: '90%', alignSelf: 'center', padding: '2.5%'}}>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                borderColor: '#008bdb',
+                paddingVertical: '2.5%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text>Comment:</Text>
+              <Text style={{width: '60%'}}>
+                I am travilling with two big bags from Budapest Liszt Ferenc
+                Airport. Able to take some light stuff with me. WIll have extra
+                2 kg.
+              </Text>
+            </View>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                borderColor: '#008bdb',
+                paddingVertical: '2.5%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text>Facebook:</Text>
+              <Text>fb.com/eminAhmadov</Text>
+            </View>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                borderColor: '#008bdb',
+                paddingVertical: '2.5%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text>Instagram:</Text>
+              <Text>@akhmedovemin</Text>
+            </View>
+            <View
+              style={{
+                paddingVertical: '2.5%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text>Mobile:</Text>
+              <Text>+36-20-2704921</Text>
+            </View>
           </View>
         )}
       </View>
