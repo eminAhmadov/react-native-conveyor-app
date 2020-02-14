@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {ScrollView} from 'react-native';
 import TravelPromo from '../../components/organisms/travel-promo';
 import {View} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
@@ -12,11 +12,11 @@ const HomeScreen = ({navigation}) => (
       backgroundColor: '#45beff',
     }}>
     <HeaderMain navigation={navigation} />
-    <View style={{alignItems: 'center'}}>
+    <ScrollView contentContainerStyle={{alignItems: 'center'}}>
       <TravelPromo navigation={navigation} />
       <TravelPromo navigation={navigation} />
       <TravelPromo navigation={navigation} />
-    </View>
+    </ScrollView>
   </View>
 );
 
