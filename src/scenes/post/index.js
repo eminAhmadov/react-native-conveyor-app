@@ -8,6 +8,8 @@ import UserPromo from '../../components/molecules/user-promo';
 import {scaleSize} from '../../styles/mixins';
 import Sidebar from '../sidebar';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import ModalSelector from 'react-native-modal-selector';
+import data from '../../utils/cities';
 
 export default class PostScreen extends React.Component {
   closeDrawer = () => {
@@ -42,13 +44,15 @@ export default class PostScreen extends React.Component {
 
   state = {
     isDatePickerVisible: false,
+    from: '',
+    to: '',
     date: '',
     dateToDisplay: '',
     comment: '',
   };
 
   render() {
-    const {isDatePickerVisible, dateToDisplay, comment} = this.state;
+    const {isDatePickerVisible, from, to, dateToDisplay, comment} = this.state;
     const {navigation} = this.props;
     return (
       <Drawer
@@ -94,13 +98,30 @@ export default class PostScreen extends React.Component {
                   alignSelf: 'center',
                   justifyContent: 'space-between',
                 }}>
-                <Item>
-                  <Input placeholder="From" />
-                </Item>
-                <Item>
-                  <Input placeholder="To" />
-                </Item>
-
+                <ModalSelector
+                  data={data}
+                  animationType="fade"
+                  overlayStyle={{backgroundColor: 'rgba(0,0,0,0.7)'}}
+                  accessible={true}
+                  style={{height: 50}}
+                  optionContainerStyle={{backgroundColor: 'white'}}
+                  onChange={option => {
+                    this.setState({from: option.label});
+                  }}>
+                  <Reinput label="From" value={from} />
+                </ModalSelector>
+                <ModalSelector
+                  data={data}
+                  animationType="fade"
+                  overlayStyle={{backgroundColor: 'rgba(0,0,0,0.7)'}}
+                  accessible={true}
+                  style={{height: 50}}
+                  optionContainerStyle={{backgroundColor: 'white'}}
+                  onChange={option => {
+                    this.setState({to: option.label});
+                  }}>
+                  <Reinput label="To" value={to} />
+                </ModalSelector>
                 <ReinputButton
                   label="Date"
                   value={dateToDisplay}
