@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, Image} from 'react-native';
+import Reinput from 'reinput';
 import {Container, Content, Item, Input, Button, Text} from 'native-base';
 import {scaleSize} from '../../styles/mixins';
 
@@ -34,13 +35,9 @@ class LoginScreen extends Component {
             resizeMode="contain"
             source={logoImage}
           />
-          <View>
-            <Item style={{width: '80%'}}>
-              <Input placeholder="Email" />
-            </Item>
-            <Item style={{width: '80%'}}>
-              <Input placeholder="Password" />
-            </Item>
+          <View style={{width: '80%'}}>
+            <Reinput label="Email" />
+            <Reinput label="Password" />
           </View>
           <View style={{width: '100%', alignItems: 'center'}}>
             <Button
