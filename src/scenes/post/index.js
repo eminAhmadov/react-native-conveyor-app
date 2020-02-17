@@ -1,10 +1,13 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
+import {ReinputButton} from 'reinput';
+import Reinput from 'reinput';
 import {Drawer, Item, Input, Button} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 import UserPromo from '../../components/molecules/user-promo';
 import {scaleSize} from '../../styles/mixins';
 import Sidebar from '../sidebar';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export default class PostScreen extends React.Component {
   closeDrawer = () => {
@@ -15,7 +18,37 @@ export default class PostScreen extends React.Component {
     this.drawer._root.open();
   };
 
+  showDatePicker = () => {
+    this.setState({
+      isDatePickerVisible: true,
+    });
+  };
+
+  hideDatePicker = () => {
+    this.setState({
+      isDatePickerVisible: false,
+    });
+  };
+
+  handleConfirm = date => {
+    console.warn('A date has been picked: ', date);
+    let dateToDisplay = date.toDateString();
+    this.setState({
+      date: date,
+      dateToDisplay: dateToDisplay,
+    });
+    this.hideDatePicker();
+  };
+
+  state = {
+    isDatePickerVisible: false,
+    date: '',
+    dateToDisplay: '',
+    comment: '',
+  };
+
   render() {
+    const {isDatePickerVisible, dateToDisplay, comment} = this.state;
     const {navigation} = this.props;
     return (
       <Drawer
@@ -57,22 +90,34 @@ export default class PostScreen extends React.Component {
               <View
                 style={{
                   height: '60%',
-                  width: '100%',
-                  alignItems: 'center',
+                  width: '80%',
+                  alignSelf: 'center',
                   justifyContent: 'space-between',
                 }}>
-                <Item style={{width: '80%'}}>
+                <Item>
                   <Input placeholder="From" />
                 </Item>
-                <Item style={{width: '80%'}}>
+                <Item>
                   <Input placeholder="To" />
                 </Item>
-                <Item style={{width: '80%'}}>
-                  <Input placeholder="Date" />
-                </Item>
-                <Item style={{width: '80%'}}>
-                  <Input placeholder="Comment" />
-                </Item>
+
+                <ReinputButton
+                  label="Date"
+                  value={dateToDisplay}
+                  onPress={() => {
+                    this.showDatePicker();
+                  }}
+                  style={{height: 50}}
+                />
+                <Reinput
+                  label="Comment"
+                  value={comment}
+                  onChangeText={value => {
+                    this.setState({
+                      comment: value,
+                    });
+                  }}
+                />
               </View>
             </View>
             <View
@@ -103,6 +148,12 @@ export default class PostScreen extends React.Component {
               </Button>
             </View>
           </View>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={this.handleConfirm}
+            onCancel={this.hideDatePicker}
+          />
         </View>
       </Drawer>
     );
