@@ -11,6 +11,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ModalSelector from 'react-native-modal-selector';
 import data from '../../utils/cities';
 
+const userImage = require('../../assets/images/user.png');
+
 export default class PostScreen extends React.Component {
   closeDrawer = () => {
     this.drawer._root.close();
@@ -89,7 +91,7 @@ export default class PostScreen extends React.Component {
                   height: '40%',
                   width: '100%',
                 }}>
-                <UserPromo />
+                <UserPromo image={userImage} name={'Emin Ahmadov'} />
               </View>
               <View
                 style={{
