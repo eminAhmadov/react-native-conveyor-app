@@ -16,6 +16,16 @@ const styles = {
     fontSize: 20,
     fontWeight: '600',
   },
+
+  headerIcon: {
+    color: colors.ACCENT_COLOR,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: colors.ACCENT_COLOR,
+  },
 };
 
 export default StyleSheet.create(styles);

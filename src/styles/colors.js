@@ -15,4 +15,5 @@ export default {
   // export const GRAY_DARK = '#8a8a8a';
 
   BACKGROUND_COLOR_LIGHT: '#ffffff',
+  ACCENT_COLOR: 'orange',
 };
