@@ -23,4 +23,5 @@ export default {
   MODAL_OVERLAY_COLOR: 'rgba(0,0,0,0.7)',
   ROUNDED_BUTTON_COLOR: 'orange',
   ROUNDED_BUTTON_TEXT: 'white',
+  TEXT_BUTTON_COLOR: 'black',
 };

@@ -17,6 +17,23 @@ const commonRoundedButtonText = {
   color: colors.ROUNDED_BUTTON_TEXT,
 };
 
+const commonScreenMainView = {
+  height: '100%',
+  width: '100%',
+  backgroundColor: colors.BACKGROUND_COLOR,
+};
+
+const commonScreenMainViewLight = {
+  height: '100%',
+  width: '100%',
+  backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+};
+
+const commonTextButtonContainer = {
+  borderBottomColor: colors.TEXT_BUTTON_COLOR,
+  borderBottomWidth: 1,
+};
+
 const styles = {
   fullScreenViewRow: {
     height: '100%',
@@ -24,16 +41,53 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  screenMainView: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.BACKGROUND_COLOR,
+  homeScreenMainView: {
+    ...commonScreenMainView,
   },
   homeScreenScrollView: {
     width: '100%',
   },
   homeScreenScrollViewContainer: {
     alignItems: 'center',
+  },
+  loginScreenMainView: {
+    ...commonScreenMainViewLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginScreenContentView: {
+    height: scaleSize(480),
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  loginScreenLogoImage: {
+    width: '50%',
+  },
+  loginScreenInputsView: {
+    width: '80%',
+  },
+  loginScreenButtonsView: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  loginScreenLoginButton: {
+    ...commonRoundedButton,
+    width: '50%',
+  },
+  loginScreenLoginButtonText: {
+    fontSize: scaleSize(18),
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: colors.ROUNDED_BUTTON_TEXT,
+  },
+  loginScreenRegisterButton: {
+    ...commonTextButtonContainer,
+    height: 35,
+    marginTop: 10,
+  },
+  loginScreenRegisterButtonText: {
+    color: colors.TEXT_BUTTON_COLOR,
   },
   userPromoImage: {
     height: '80%',

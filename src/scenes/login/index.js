@@ -1,69 +1,71 @@
 import React, {Component} from 'react';
 import {View, Image} from 'react-native';
 import Reinput from 'reinput';
-import {Container, Content, Item, Input, Button, Text} from 'native-base';
-import {scaleSize} from '../../styles/mixins';
+import {Button, Text} from 'native-base';
+import styles from '../../styles/styles';
 
 const logoImage = require('../../assets/images/logo.png');
 
 class LoginScreen extends Component {
   onLoginButtonPressed = () => {
     const {navigation} = this.props;
-
     navigation.navigate('Home');
   };
 
-  render() {
+  onRegisterButtonPressed = () => {
     const {navigation} = this.props;
+    navigation.navigate('Registration');
+  };
+
+  state = {
+    email: '',
+    password: '',
+  };
+
+  render() {
+    const {email, password} = this.state;
     return (
-      <View
-        style={{
-          height: '100%',
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <View
-          style={{
-            height: scaleSize(480),
-            width: '100%',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
+      <View style={styles.loginScreenMainView}>
+        <View style={styles.loginScreenContentView}>
           <Image
-            style={{width: '50%'}}
+            style={styles.loginScreenLogoImage}
             resizeMode="contain"
             source={logoImage}
           />
-          <View style={{width: '80%'}}>
-            <Reinput label="Email" />
-            <Reinput label="Password" />
+          <View style={styles.loginScreenInputsView}>
+            <Reinput
+              label="Email"
+              value={email}
+              onChange={value => {
+                this.setState({
+                  email: value,
+                });
+              }}
+            />
+            <Reinput
+              label="Password"
+              value={password}
+              onChange={value => {
+                this.setState({
+                  password: value,
+                });
+              }}
+            />
           </View>
-          <View style={{width: '100%', alignItems: 'center'}}>
+          <View style={styles.loginScreenButtonsView}>
             <Button
               rounded
-              style={{
-                borderRadius: 20,
-                width: '50%',
-                justifyContent: 'center',
-                backgroundColor: 'orange',
-              }}
+              style={styles.loginScreenLoginButton}
               onPress={this.onLoginButtonPressed}>
-              <Text
-                style={{textAlign: 'center', fontWeight: 'bold', fontSize: 20}}>
-                Login
-              </Text>
+              <Text style={styles.loginScreenLoginButtonText}>Login</Text>
             </Button>
             <Button
               transparent
-              onPress={() => navigation.navigate('Registration')}
-              style={{
-                borderBottomColor: 'black',
-                borderBottomWidth: 1,
-                height: 35,
-                marginTop: 10,
-              }}>
-              <Text style={{color: 'black'}}>Registration</Text>
+              onPress={this.onRegisterButtonPressed}
+              style={styles.loginScreenRegisterButton}>
+              <Text style={styles.loginScreenRegisterButtonText}>
+                Registration
+              </Text>
             </Button>
           </View>
         </View>
