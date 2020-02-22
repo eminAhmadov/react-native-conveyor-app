@@ -15,6 +15,7 @@ export default {
   // export const GRAY_DARK = '#8a8a8a';
 
   BACKGROUND_COLOR_LIGHT: '#ffffff',
+  BACKGROUND_COLOR: '#45beff',
   ACCENT_COLOR: 'orange',
   BOX_SHADOW_COLOR: 'black',
   BORDER_COLOR_LIGHT: 'gray',

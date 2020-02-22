@@ -4,6 +4,7 @@ import TravelPromo from '../../components/organisms/travel-promo';
 import {View, Drawer} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 import Sidebar from '../sidebar';
+import styles from '../../styles/styles';
 
 export default class HomeScreen extends React.Component {
   closeDrawer = () => {
@@ -23,17 +24,14 @@ export default class HomeScreen extends React.Component {
         }}
         content={<Sidebar />}
         onClose={() => this.closeDrawer()}>
-        <View
-          style={{
-            height: '100%',
-            width: '100%',
-            backgroundColor: '#45beff',
-          }}>
+        <View style={styles.screenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
-          <ScrollView contentContainerStyle={{alignItems: 'center'}}>
-            <TravelPromo navigation={navigation} />
-            <TravelPromo navigation={navigation} />
-            <TravelPromo navigation={navigation} />
+          <ScrollView
+            style={styles.homeScreenScrollView}
+            contentContainerStyle={styles.homeScreenScrollViewContainer}>
+            <TravelPromo />
+            <TravelPromo />
+            <TravelPromo />
           </ScrollView>
         </View>
       </Drawer>

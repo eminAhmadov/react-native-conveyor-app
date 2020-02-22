@@ -24,6 +24,17 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  screenMainView: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: colors.BACKGROUND_COLOR,
+  },
+  homeScreenScrollView: {
+    width: '100%',
+  },
+  homeScreenScrollViewContainer: {
+    alignItems: 'center',
+  },
   userPromoImage: {
     height: '80%',
     width: '40%',
