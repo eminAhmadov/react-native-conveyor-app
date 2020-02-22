@@ -5,9 +5,9 @@ import colors from '../../styles/colors';
 import styles from '../../styles/styles';
 
 const HeaderMain = ({openDrawer}) => (
-  <View style={{zIndex: 30}}>
+  <View style={styles.headerView}>
     <Header style={{backgroundColor: colors.BACKGROUND_COLOR_LIGHT}}>
-      <Left style={{flex: 1}}>
+      <Left style={styles.headerLeft}>
         <Button
           onPress={() => {
             openDrawer();
@@ -16,10 +16,10 @@ const HeaderMain = ({openDrawer}) => (
           <Icon style={styles.headerIcon} type="Entypo" name={'menu'} />
         </Button>
       </Left>
-      <Body style={{alignItems: 'center', flex: 1}}>
+      <Body style={styles.headerBody}>
         <Text style={styles.headerTitle}>Conveyor</Text>
       </Body>
-      <Right style={{flex: 1}}>
+      <Right style={styles.headerReght}>
         <Button onPress={() => {}} transparent>
           <Icon
             style={styles.headerIcon}
