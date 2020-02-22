@@ -18,6 +18,7 @@ export default {
   ACCENT_COLOR: 'orange',
   BOX_SHADOW_COLOR: 'black',
   BORDER_COLOR_LIGHT: 'gray',
+  BORDER_COLOR_DARK: '#008bdb',
   MODAL_OVERLAY_COLOR: 'rgba(0,0,0,0.7)',
   ROUNDED_BUTTON_COLOR: 'orange',
   ROUNDED_BUTTON_TEXT: 'white',

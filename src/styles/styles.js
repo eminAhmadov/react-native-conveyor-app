@@ -126,6 +126,64 @@ const styles = {
   searchFieldSetNotificationAlertButtonText: {
     ...commonRoundedButtonText,
   },
+  travelPromoView: {
+    width: '95%',
+    borderRadius: 20,
+    borderWidth: 5,
+    borderColor: colors.BORDER_COLOR_DARK,
+    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+    marginVertical: 4,
+  },
+  travelPromoVisibleView: {
+    height: scaleSize(100),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  travelPromoUserImageView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '30%',
+  },
+  travelPromoUserImage: {
+    width: '80%',
+    height: '80%',
+  },
+  travelPromoDataView: {
+    width: '50%',
+    paddingHorizontal: '5%',
+    alignSelf: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  travelPromoExpandButtonView: {
+    width: '20%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  travelPromoExpandButton: {
+    fontSize: 35,
+    color: colors.ACCENT_COLOR,
+  },
+  travelPromoHiddenView: {
+    width: '90%',
+    alignSelf: 'center',
+    padding: '2.5%',
+  },
+  travelPromoDetailsRow: {
+    borderBottomWidth: 1,
+    borderColor: colors.BORDER_COLOR_DARK,
+    paddingVertical: '2.5%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  travelPromoDetailsLastRow: {
+    paddingVertical: '2.5%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  travelPromoDetailsCommentText: {
+    width: '60%',
+  },
 };
 
 export default StyleSheet.create(styles);

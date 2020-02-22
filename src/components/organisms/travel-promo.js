@@ -1,66 +1,50 @@
 import React from 'react';
 import {Text, Image, TouchableOpacity} from 'react-native';
 import {View, Icon} from 'native-base';
-import {scaleSize} from '../../styles/mixins';
+import styles from '../../styles/styles';
 
-const userImage = require('../../assets/images/user.png');
+const defaultUserImage = require('../../assets/images/user.png');
 
 export default class TravelPromo extends React.PureComponent {
   state = {showDetails: false};
 
   render() {
     const {showDetails} = this.state;
-    const {navigation} = this.props;
+    const {
+      userImage = defaultUserImage,
+      promoData = {
+        name: 'Emin Ahmadov',
+        travelFrom: 'Baku',
+        travelTo: 'Budapest',
+        date: '4 June 2020',
+      },
+      detailsData = {
+        comment:
+          'I am travilling with two big bags from Budapest Liszt Ferenc Airport. Able to take some light stuff with me. WIll have extra 2 kg.',
+        facebook: 'fb.com/eminAhmadov',
+        instagram: '@akhmedovemin',
+        mobile: '+36-20-2704921',
+      },
+    } = this.props;
 
     return (
-      <View
-        style={{
-          width: '95%',
-          borderRadius: 20,
-          borderWidth: 5,
-          borderColor: '#008bdb',
-          backgroundColor: 'white',
-          marginVertical: 4,
-        }}>
-        <View
-          style={{
-            height: scaleSize(100),
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: scaleSize(100),
-              width: '30%',
-            }}>
+      <View style={styles.travelPromoView}>
+        <View style={styles.travelPromoVisibleView}>
+          <View style={styles.travelPromoUserImageView}>
             <Image
-              style={{width: '80%', height: '80%'}}
+              style={styles.travelPromoUserImage}
               resizeMode="contain"
               source={userImage}
             />
           </View>
-          <View
-            style={{
-              height: scaleSize(45),
-              width: '50%',
-              paddingHorizontal: '5%',
-              alignSelf: 'center',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-            }}>
-            <Text>Emin Ahmadov</Text>
-            <Text>Baku -> Budapest</Text>
-            <Text>4 June 2020</Text>
+          <View style={styles.travelPromoDataView}>
+            <Text>{promoData.name}</Text>
+            <Text>
+              {promoData.travelFrom} -> {promoData.travelTo}
+            </Text>
+            <Text>{promoData.date}</Text>
           </View>
-          <View
-            style={{
-              height: scaleSize(100),
-              width: '20%',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+          <View style={styles.travelPromoExpandButtonView}>
             <TouchableOpacity
               onPress={() => {
                 this.setState({
@@ -68,7 +52,7 @@ export default class TravelPromo extends React.PureComponent {
                 });
               }}>
               <Icon
-                style={{fontSize: 35, color: 'orange'}}
+                style={styles.travelPromoExpandButton}
                 type="Entypo"
                 name={
                   showDetails
@@ -80,52 +64,24 @@ export default class TravelPromo extends React.PureComponent {
           </View>
         </View>
         {showDetails && (
-          <View style={{width: '90%', alignSelf: 'center', padding: '2.5%'}}>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: '#008bdb',
-                paddingVertical: '2.5%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
+          <View style={styles.travelPromoHiddenView}>
+            <View style={styles.travelPromoDetailsRow}>
               <Text>Comment:</Text>
-              <Text style={{width: '60%'}}>
-                I am travilling with two big bags from Budapest Liszt Ferenc
-                Airport. Able to take some light stuff with me. WIll have extra
-                2 kg.
+              <Text style={styles.travelPromoDetailsCommentText}>
+                {detailsData.comment}
               </Text>
             </View>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: '#008bdb',
-                paddingVertical: '2.5%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.travelPromoDetailsRow}>
               <Text>Facebook:</Text>
-              <Text>fb.com/eminAhmadov</Text>
+              <Text>{detailsData.facebook}</Text>
             </View>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: '#008bdb',
-                paddingVertical: '2.5%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.travelPromoDetailsRow}>
               <Text>Instagram:</Text>
-              <Text>@akhmedovemin</Text>
+              <Text>{detailsData.instagram}</Text>
             </View>
-            <View
-              style={{
-                paddingVertical: '2.5%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.travelPromoDetailsLastRow}>
               <Text>Mobile:</Text>
-              <Text>+36-20-2704921</Text>
+              <Text>{detailsData.mobile}</Text>
             </View>
           </View>
         )}
