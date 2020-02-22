@@ -43,6 +43,9 @@ const styles = {
     fontSize: 20,
     fontWeight: '600',
   },
+  header: {
+    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+  },
   headerView: {
     zIndex: 30,
   },
