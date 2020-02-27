@@ -1,20 +1,13 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {Container, List, ListItem, Left, Body, Icon} from 'native-base';
+import styles from '../../styles/styles';
 
 export default class Sidebar extends React.Component {
   render() {
-    const {
-      goToProfileSettings,
-      goToPushnotAlertSettings,
-      goToPizza,
-    } = this.props;
+    const {goToProfileSettings, goToPushnotAlertSettings, logOut} = this.props;
     return (
-      <Container
-        style={{
-          backgroundColor: 'white',
-          paddingTop: 40,
-        }}>
+      <Container style={styles.sidebarContainer}>
         <List>
           <ListItem itemDivider>
             <Text>Settings</Text>
@@ -24,7 +17,7 @@ export default class Sidebar extends React.Component {
               <Icon
                 type="MaterialCommunityIcons"
                 name="settings"
-                style={{fontSize: 22}}
+                style={styles.sidebarListItemIcon}
               />
             </Left>
             <Body>
@@ -36,7 +29,7 @@ export default class Sidebar extends React.Component {
               <Icon
                 type="Ionicons"
                 name="md-notifications"
-                style={{fontSize: 22}}
+                style={styles.sidebarListItemIcon}
               />
             </Left>
             <Body>
@@ -46,9 +39,13 @@ export default class Sidebar extends React.Component {
           <ListItem itemDivider>
             <Text>App</Text>
           </ListItem>
-          <ListItem>
+          <ListItem button onPress={logOut}>
             <Left>
-              <Icon type="Entypo" name="log-out" style={{fontSize: 22}} />
+              <Icon
+                type="Entypo"
+                name="log-out"
+                style={styles.sidebarListItemIcon}
+              />
             </Left>
             <Body>
               <Text>Log Out</Text>

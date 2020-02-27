@@ -131,6 +131,13 @@ const styles = {
   searchScreenScrollViewContainerStyle: {
     alignItems: 'center',
   },
+  sidebarContainer: {
+    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+    paddingTop: 40,
+  },
+  sidebarListItemIcon: {
+    fontSize: 22,
+  },
   userPromoImage: {
     height: '80%',
     width: '40%',
