@@ -6,6 +6,7 @@ import SearchField from '../../components/organisms/search-field';
 import {ScrollView} from 'react-native-gesture-handler';
 import TravelPromo from '../../components/organisms/travel-promo';
 import Sidebar from '../sidebar';
+import styles from '../../styles/styles';
 
 export default class SearchScreen extends React.Component {
   closeDrawer = () => {
@@ -25,17 +26,12 @@ export default class SearchScreen extends React.Component {
         }}
         content={<Sidebar />}
         onClose={() => this.closeDrawer()}>
-        <View
-          style={{
-            height: '100%',
-            width: '100%',
-            backgroundColor: '#45beff',
-          }}>
+        <View style={styles.searchScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
           <SearchField />
           <ScrollView
-            style={{height: '74%'}}
-            contentContainerStyle={{alignItems: 'center'}}>
+            style={styles.searchScreenScrollViewStyle}
+            contentContainerStyle={styles.searchScreenScrollViewContainerStyle}>
             <TravelPromo />
             <TravelPromo />
             <TravelPromo />

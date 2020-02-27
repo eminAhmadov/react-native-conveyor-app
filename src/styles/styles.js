@@ -122,6 +122,15 @@ const styles = {
   registrationScreenCancelButtonText: {
     color: colors.TEXT_BUTTON_COLOR,
   },
+  searchScreenMainView: {
+    ...commonScreenMainView,
+  },
+  searchScreenScrollViewStyle: {
+    height: '74%',
+  },
+  searchScreenScrollViewContainerStyle: {
+    alignItems: 'center',
+  },
   userPromoImage: {
     height: '80%',
     width: '40%',
