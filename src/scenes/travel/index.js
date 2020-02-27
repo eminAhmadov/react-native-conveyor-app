@@ -1,16 +1,10 @@
-import React, {Component} from 'react';
-import {View, Image} from 'react-native';
-import {Container, Content, Item, Input, Button, Text} from 'native-base';
+import React from 'react';
+import {View} from 'react-native';
 import HeaderMain from '../../components/organisms/header-main';
-import {scaleSize} from '../../styles/mixins';
+import styles from '../../styles/styles';
 
 const TravelScreen = ({navigation}) => (
-  <View
-    style={{
-      height: '100%',
-      width: '100%',
-      backgroundColor: '#45beff',
-    }}>
+  <View style={styles.homeScreenMainView}>
     <HeaderMain navigation={navigation} back backNavigateTo="Home" />
   </View>
 );
