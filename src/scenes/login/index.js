@@ -35,7 +35,6 @@ class LoginScreen extends Component {
           <View style={styles.loginScreenInputsView}>
             <Reinput
               label="Email"
-              value={email}
               onChange={value => {
                 this.setState({
                   email: value,
@@ -44,7 +43,6 @@ class LoginScreen extends Component {
             />
             <Reinput
               label="Password"
-              value={password}
               onChange={value => {
                 this.setState({
                   password: value,
