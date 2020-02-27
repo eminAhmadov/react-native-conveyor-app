@@ -76,10 +76,7 @@ const styles = {
     width: '50%',
   },
   loginScreenLoginButtonText: {
-    fontSize: scaleSize(18),
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: colors.ROUNDED_BUTTON_TEXT,
+    ...commonRoundedButtonText,
   },
   loginScreenRegisterButton: {
     ...commonTextButtonContainer,
@@ -87,6 +84,42 @@ const styles = {
     marginTop: 10,
   },
   loginScreenRegisterButtonText: {
+    color: colors.TEXT_BUTTON_COLOR,
+  },
+  registrationScreenMainView: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  registrationScreenContentView: {
+    marginVertical: '20%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  registrationScreenLogoImageStyle: {
+    width: '50%',
+  },
+  registrationScreenInputFieldsView: {
+    width: '80%',
+  },
+  registrationSreenButtonsContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  registrationScreenRegisterButton: {
+    ...commonRoundedButton,
+    width: '60%',
+  },
+  registrationScreenRegisterButtonText: {
+    ...commonRoundedButtonText,
+  },
+  registrationScreenCancelButton: {
+    ...commonTextButtonContainer,
+    height: 35,
+    marginTop: 10,
+  },
+  registrationScreenCancelButtonText: {
     color: colors.TEXT_BUTTON_COLOR,
   },
   userPromoImage: {

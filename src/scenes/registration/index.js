@@ -1,70 +1,90 @@
 import React, {Component} from 'react';
 import {ScrollView, View, Image} from 'react-native';
 import Reinput from 'reinput';
-import {Container, Content, Item, Input, Button, Text} from 'native-base';
-import {scaleSize} from '../../styles/mixins';
+import {Button, Text} from 'native-base';
+import styles from '../../styles/styles';
 
 const logoImage = require('../../assets/images/logo.png');
 
 class RegistrationScreen extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+
   render() {
+    const {firstName, lastName, email, password, confirmPassword} = this.state;
     const {navigation} = this.props;
     return (
       <ScrollView>
-        <View
-          style={{
-            width: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <View
-            style={{
-              marginVertical: '20%',
-              width: '100%',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
+        <View style={styles.registrationScreenMainView}>
+          <View style={styles.registrationScreenContentView}>
             <Image
-              style={{width: '50%'}}
+              style={styles.registrationScreenLogoImageStyle}
               resizeMode="contain"
               source={logoImage}
             />
-            <View style={{width: '80%'}}>
-              <Reinput label="Frist Name" />
-              <Reinput label="Last Name" />
-              <Reinput label="Email" />
-              <Reinput label="Password" />
-              <Reinput label="Confirm Password" />
+            <View style={styles.registrationScreenInputFieldsView}>
+              <Reinput
+                label="Frist Name"
+                onBlur={value => {
+                  this.setState({
+                    firstName: value,
+                  });
+                }}
+              />
+              <Reinput
+                label="Last Name"
+                onChange={value => {
+                  this.setState({
+                    lastName: value,
+                  });
+                }}
+              />
+              <Reinput
+                label="Email"
+                onChange={value => {
+                  this.setState({
+                    email: value,
+                  });
+                }}
+              />
+              <Reinput
+                label="Password"
+                onChange={value => {
+                  this.setState({
+                    password: value,
+                  });
+                }}
+              />
+              <Reinput
+                label="Confirm Password"
+                onChange={value => {
+                  this.setState({
+                    confirmPassword: value,
+                  });
+                }}
+              />
             </View>
-            <View style={{width: '100%', alignItems: 'center'}}>
+            <View style={styles.registrationSreenButtonsContainer}>
               <Button
                 rounded
-                style={{
-                  borderRadius: 20,
-                  width: '50%',
-                  justifyContent: 'center',
-                  backgroundColor: 'orange',
-                }}
+                style={styles.registrationScreenRegisterButton}
                 onPress={() => {}}>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    fontSize: 20,
-                  }}>
+                <Text style={styles.registrationScreenRegisterButtonText}>
                   Register
                 </Text>
               </Button>
               <Button
                 transparent
                 onPress={() => navigation.navigate('Login')}
-                style={{
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1,
-                  height: 35,
-                  marginTop: 10,
-                }}>
-                <Text style={{color: 'black'}}>Cancel</Text>
+                style={styles.registrationScreenCancelButton}>
+                <Text style={styles.registrationScreenCancelButtonText}>
+                  Cancel
+                </Text>
               </Button>
             </View>
           </View>
