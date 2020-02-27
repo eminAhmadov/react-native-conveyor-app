@@ -24,7 +24,7 @@ export default class HomeScreen extends React.Component {
         }}
         content={<Sidebar />}
         onClose={() => this.closeDrawer()}>
-        <View style={styles.screenMainView}>
+        <View style={styles.homeScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
           <ScrollView
             style={styles.homeScreenScrollView}
