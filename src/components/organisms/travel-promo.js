@@ -68,20 +68,24 @@ export default class TravelPromo extends React.PureComponent {
             <View style={styles.travelPromoDetailsRow}>
               <Text>Comment:</Text>
               <Text style={styles.travelPromoDetailsCommentText}>
-                {detailsData.comment}
+                {detailsData.comment ? detailsData.comment : 'No comment'}
               </Text>
             </View>
             <View style={styles.travelPromoDetailsRow}>
               <Text>Facebook:</Text>
-              <Text>{detailsData.facebook}</Text>
+              <Text>
+                {detailsData.facebook ? detailsData.facebook : 'Hidden'}
+              </Text>
             </View>
             <View style={styles.travelPromoDetailsRow}>
               <Text>Instagram:</Text>
-              <Text>{detailsData.instagram}</Text>
+              <Text>
+                {detailsData.instagram ? detailsData.instagram : 'Hidden'}
+              </Text>
             </View>
             <View style={styles.travelPromoDetailsLastRow}>
               <Text>Mobile:</Text>
-              <Text>{detailsData.mobile}</Text>
+              <Text>{detailsData.mobile ? detailsData.mobile : 'Hidden'}</Text>
             </View>
           </View>
         )}

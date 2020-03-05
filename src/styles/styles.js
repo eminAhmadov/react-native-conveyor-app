@@ -48,7 +48,7 @@ const styles = {
     width: '100%',
   },
   homeScreenScrollViewContainer: {
-    alignItems: 'center',
+    width: '100%',
   },
   loginScreenMainView: {
     ...commonScreenMainViewLight,
@@ -127,8 +127,10 @@ const styles = {
   },
   searchScreenScrollViewStyle: {
     height: '74%',
+    width: '100%',
   },
   searchScreenScrollViewContainerStyle: {
+    width: '100%',
     alignItems: 'center',
   },
   sidebarContainer: {
@@ -282,7 +284,7 @@ const styles = {
     color: colors.ACCENT_COLOR,
   },
   travelPromoHiddenView: {
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
     padding: '2.5%',
   },
@@ -300,6 +302,7 @@ const styles = {
   },
   travelPromoDetailsCommentText: {
     width: '60%',
+    textAlign: 'right',
   },
 };
 
