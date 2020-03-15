@@ -260,12 +260,12 @@ const styles = {
   },
   loadMoreTextWrapper: {
     borderBottomWidth: 2,
-    borderBottomColor: 'orange',
+    borderBottomColor: colors.ACCENT_COLOR,
   },
   loadMoreText: {
     fontSize: 16,
     fontWeight: '900',
-    color: 'orange',
+    color: colors.ACCENT_COLOR,
   },
   travelPromoView: {
     width: '95%',

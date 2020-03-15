@@ -11,7 +11,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ModalSelector from 'react-native-modal-selector';
 import data from '../../utils/cities';
 
-const userImage = require('../../assets/images/user.png');
+const userImage = require('../../assets/images/user_male.png');
 
 export default class PostScreen extends React.Component {
   closeDrawer = () => {

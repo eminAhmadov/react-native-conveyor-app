@@ -8,6 +8,8 @@ import styles from '../../styles/styles';
 import travelService from '../../services/service';
 import LoadMore from '../../components/organisms/load-more';
 
+const userImageMale = require('../../assets/images/user_male.png');
+const userImageFemale = require('../../assets/images/user_female.png');
 export default class HomeScreen extends React.Component {
   closeDrawer = () => {
     this.drawer._root.close();
@@ -134,6 +136,15 @@ export default class HomeScreen extends React.Component {
     hasMoreToLoad: true,
   };
 
+  getUserImage = item => {
+    const {gender} = item;
+
+    if (gender === 'female') {
+      return userImageFemale;
+    }
+    return userImageMale;
+  };
+
   genereatePromoData = item => {
     const {name, origin, destination, date} = item;
 
@@ -179,7 +190,7 @@ export default class HomeScreen extends React.Component {
               contentContainerStyle={styles.homeScreenScrollViewContainer}
               renderItem={({item}) => (
                 <TravelPromo
-                  // userImage={this.getUserImage}
+                  userImage={this.getUserImage(item)}
                   promoData={this.genereatePromoData(item)}
                   detailsData={this.genereteDetailsData(item)}
                 />

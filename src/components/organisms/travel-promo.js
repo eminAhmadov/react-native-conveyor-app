@@ -3,7 +3,7 @@ import {Text, Image, TouchableOpacity} from 'react-native';
 import {View, Icon} from 'native-base';
 import styles from '../../styles/styles';
 
-const defaultUserImage = require('../../assets/images/user.png');
+const defaultUserImage = require('../../assets/images/user_male.png');
 
 export default class TravelPromo extends React.PureComponent {
   state = {showDetails: false};
