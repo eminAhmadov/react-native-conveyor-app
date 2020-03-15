@@ -306,7 +306,7 @@ const styles = {
     color: colors.ACCENT_COLOR,
   },
   travelPromoHiddenView: {
-    width: '100%',
+    width: '120%',
     alignSelf: 'center',
     padding: '2.5%',
   },

@@ -40,6 +40,40 @@ class SearchField extends React.Component {
     this.hideDatePicker();
   };
 
+  handleCancel = () => {
+    const {choosingDate} = this.state;
+    if (choosingDate === 1) {
+      this.setState({
+        fromDate: '',
+        fromDateToDisplay: '',
+      });
+    } else if (choosingDate === 2) {
+      this.setState({
+        toDate: '',
+        toDateToDisplay: '',
+      });
+    }
+    this.hideDatePicker();
+  };
+
+  formatDate = date => {
+    if (date) {
+      var month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate(),
+        year = date.getFullYear();
+
+      if (month.length < 2) {
+        month = '0' + month;
+      }
+      if (day.length < 2) {
+        day = '0' + day;
+      }
+
+      return [year, month, day].join('-');
+    }
+    return '';
+  };
+
   state = {
     isDatePickerVisible: false,
     from: '',
@@ -56,9 +90,12 @@ class SearchField extends React.Component {
       isDatePickerVisible,
       from,
       to,
+      fromDate,
       fromDateToDisplay,
+      toDate,
       toDateToDisplay,
     } = this.state;
+    const {onSearchPressed} = this.props;
     return (
       <View style={styles.searchFieldMainView}>
         <View style={styles.searchFieldTopRow}>
@@ -134,7 +171,14 @@ class SearchField extends React.Component {
             <Button
               rounded
               style={styles.searchFieldSearchButton}
-              onPress={() => {}}>
+              onPress={() =>
+                onSearchPressed(
+                  from,
+                  to,
+                  this.formatDate(fromDate),
+                  this.formatDate(toDate),
+                )
+              }>
               <Icon
                 style={styles.searchFieldSearchButtonIcon}
                 type="FontAwesome"
@@ -157,7 +201,7 @@ class SearchField extends React.Component {
           isVisible={isDatePickerVisible}
           mode="date"
           onConfirm={this.handleConfirm}
-          onCancel={this.hideDatePicker}
+          onCancel={this.handleCancel}
         />
       </View>
     );
