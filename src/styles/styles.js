@@ -46,6 +46,7 @@ const styles = {
   },
   homeScreenScrollView: {
     width: '100%',
+    height: '100%',
   },
   homeScreenScrollViewContainer: {
     width: '100%',

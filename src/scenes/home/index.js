@@ -1,10 +1,11 @@
 import React from 'react';
-import {ScrollView, FlatList} from 'react-native';
+import {ScrollView, Text, SectionList} from 'react-native';
 import TravelPromo from '../../components/organisms/travel-promo';
 import {View, Drawer} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 import Sidebar from '../sidebar';
 import styles from '../../styles/styles';
+import travelService from '../../services/service';
 
 export default class HomeScreen extends React.Component {
   closeDrawer = () => {
@@ -19,7 +20,7 @@ export default class HomeScreen extends React.Component {
     this.fetchResult();
   }
 
-  fetchResult = () => {
+  fetchResultMock = () => {
     this.setState({
       list: [
         {
@@ -89,21 +90,48 @@ export default class HomeScreen extends React.Component {
         },
       ],
     });
-
-    // const {offset, limit, list} = this.state;
-    // fetchModeDateFromAPI(offset, limit).then(res => {
-    //   if (!res.list) {
-    //     return;
-    //   }
-    //   this.setState({
-    //     list: list.concat(res.list),
-    //     offset: offset + 100,
-    //     limit: limit,
-    //   });
-    // });
   };
 
-  state = {list: [], offset: 0, limit: 5};
+  fetchResult = () => {
+    const {offset, limit, list} = this.state;
+    this.setState(
+      {
+        isFetching: true,
+      },
+      () => {
+        travelService.listAllTravels(offset, limit).then(res => {
+          console.log(res);
+          if (res.length <= 0) {
+            this.setState({
+              isFetching: false,
+              hasMoreToLoad: false,
+            });
+            return;
+          }
+          this.setState(
+            {
+              list: list.concat([{title: offset.toString(), data: res}]),
+              offset: offset + 1,
+              hasMoreToLoad: true,
+            },
+            () => {
+              this.setState({
+                isFetching: false,
+              });
+            },
+          );
+        });
+      },
+    );
+  };
+
+  state = {
+    list: [{title: '0', data: []}],
+    offset: 0,
+    limit: 10,
+    isFetching: false,
+    hasMoreToLoad: true,
+  };
 
   genereatePromoData = item => {
     const {name, origin, destination, date} = item;
@@ -132,7 +160,7 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
-    const {list, offset, limit} = this.state;
+    const {list, isFetching, hasMoreToLoad} = this.state;
     const {navigation} = this.props;
     return (
       <Drawer
@@ -143,18 +171,12 @@ export default class HomeScreen extends React.Component {
         onClose={() => this.closeDrawer()}>
         <View style={styles.homeScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
-          <ScrollView
-            style={styles.homeScreenScrollView}
-            contentContainerStyle={styles.homeScreenScrollViewContainer}>
-            <FlatList
+          <View style={{flex: 1}}>
+            <SectionList
               contentContainerStyle={{
                 alignItems: 'center',
                 width: '100%',
               }}
-              extraData={this.state}
-              // onEndReached={this.fetchResult}
-              // onEndReachedThreshold={0.7}
-              data={list}
               renderItem={({item}) => (
                 <TravelPromo
                   // userImage={this.getUserImage}
@@ -163,8 +185,29 @@ export default class HomeScreen extends React.Component {
                 />
               )}
               keyExtractor={item => item.id.toString()}
+              sections={list}
+              onEndReached={() => {
+                console.log('ON END REACHED');
+                if (isFetching) {
+                  console.log('IS FETCHING');
+                  return;
+                }
+                console.log('fetching the result');
+                this.fetchResult();
+              }}
+              onEndReachedThreshold={0.01}
             />
-          </ScrollView>
+            <View
+              style={{
+                height: 40,
+                widht: 80,
+                backgroundColor: 'green',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text>{hasMoreToLoad ? 'Load More' : 'No more to load!'}</Text>
+            </View>
+          </View>
         </View>
       </Drawer>
     );
