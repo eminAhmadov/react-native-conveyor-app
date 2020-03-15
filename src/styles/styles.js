@@ -50,6 +50,7 @@ const styles = {
   },
   homeScreenScrollViewContainer: {
     width: '100%',
+    alignItems: 'center',
   },
   loginScreenMainView: {
     ...commonScreenMainViewLight,
@@ -245,6 +246,26 @@ const styles = {
   },
   searchFieldSetNotificationAlertButtonText: {
     ...commonRoundedButtonText,
+  },
+  loadMoreView: {
+    height: scaleSize(100),
+    width: '95%',
+    borderRadius: 20,
+    borderWidth: 5,
+    borderColor: colors.BORDER_COLOR_DARK,
+    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+    marginVertical: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadMoreTextWrapper: {
+    borderBottomWidth: 2,
+    borderBottomColor: 'orange',
+  },
+  loadMoreText: {
+    fontSize: 16,
+    fontWeight: '900',
+    color: 'orange',
   },
   travelPromoView: {
     width: '95%',

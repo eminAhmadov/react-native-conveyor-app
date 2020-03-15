@@ -1,11 +1,12 @@
 import React from 'react';
-import {ScrollView, Text, SectionList} from 'react-native';
+import {ScrollView, SectionList} from 'react-native';
 import TravelPromo from '../../components/organisms/travel-promo';
 import {View, Drawer} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 import Sidebar from '../sidebar';
 import styles from '../../styles/styles';
 import travelService from '../../services/service';
+import LoadMore from '../../components/organisms/load-more';
 
 export default class HomeScreen extends React.Component {
   closeDrawer = () => {
@@ -171,12 +172,11 @@ export default class HomeScreen extends React.Component {
         onClose={() => this.closeDrawer()}>
         <View style={styles.homeScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
-          <View style={{flex: 1}}>
+          <ScrollView
+            style={styles.homeScreenScrollView}
+            contentContainerStyle={styles.homeScreenScrollViewContainer}>
             <SectionList
-              contentContainerStyle={{
-                alignItems: 'center',
-                width: '100%',
-              }}
+              contentContainerStyle={styles.homeScreenScrollViewContainer}
               renderItem={({item}) => (
                 <TravelPromo
                   // userImage={this.getUserImage}
@@ -186,28 +186,18 @@ export default class HomeScreen extends React.Component {
               )}
               keyExtractor={item => item.id.toString()}
               sections={list}
-              onEndReached={() => {
-                console.log('ON END REACHED');
+            />
+            <LoadMore
+              isLoading={isFetching}
+              hasMoreToLoad={hasMoreToLoad}
+              onLoadPressed={() => {
                 if (isFetching) {
-                  console.log('IS FETCHING');
                   return;
                 }
-                console.log('fetching the result');
                 this.fetchResult();
               }}
-              onEndReachedThreshold={0.01}
             />
-            <View
-              style={{
-                height: 40,
-                widht: 80,
-                backgroundColor: 'green',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text>{hasMoreToLoad ? 'Load More' : 'No more to load!'}</Text>
-            </View>
-          </View>
+          </ScrollView>
         </View>
       </Drawer>
     );
