@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import {View, Image} from 'react-native';
 import Reinput from 'reinput';
 import {Button, Text} from 'native-base';
+import {connect} from 'react-redux';
+import {getUser} from '../../store/actions';
 import styles from '../../styles/styles';
 
 const logoImage = require('../../assets/images/logo.png');
 
 class LoginScreen extends Component {
   onLoginButtonPressed = () => {
-    const {navigation} = this.props;
+    const {navigation, onLogin} = this.props;
+    onLogin({firstName: 'Emin', lastName: 'Ahmadov'});
     navigation.navigate('Home');
   };
 
@@ -72,4 +75,13 @@ class LoginScreen extends Component {
   }
 }
 
-export default LoginScreen;
+const mapDispatchToProps = dispatch => ({
+  onLogin: user => {
+    dispatch(getUser(user));
+  },
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(LoginScreen);
