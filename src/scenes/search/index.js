@@ -8,7 +8,7 @@ import TravelPromo from '../../components/organisms/travel-promo';
 import Sidebar from '../sidebar';
 import LoadMore from '../../components/organisms/load-more';
 import styles from '../../styles/styles';
-import travelService from '../../services/service';
+import travelService from '../../services/travel/service';
 
 const userImageMale = require('../../assets/images/user_male.png');
 const userImageFemale = require('../../assets/images/user_female.png');

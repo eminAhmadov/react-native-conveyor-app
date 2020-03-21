@@ -5,7 +5,7 @@ import {View, Drawer} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 import Sidebar from '../sidebar';
 import styles from '../../styles/styles';
-import travelService from '../../services/service';
+import travelService from '../../services/travel/service';
 import LoadMore from '../../components/organisms/load-more';
 
 const userImageMale = require('../../assets/images/user_male.png');
