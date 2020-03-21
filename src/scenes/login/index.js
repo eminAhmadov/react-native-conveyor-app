@@ -4,14 +4,18 @@ import Reinput from 'reinput';
 import {Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import {getUser} from '../../store/actions';
+import authService from '../../services/authentication/service';
 import styles from '../../styles/styles';
 
 const logoImage = require('../../assets/images/logo.png');
 
 class LoginScreen extends Component {
   onLoginButtonPressed = () => {
+    const {email, password} = this.state;
     const {navigation, onLogin} = this.props;
-    onLogin({firstName: 'Emin', lastName: 'Ahmadov'});
+    authService.login(email, password).then(res => {
+      onLogin(res);
+    });
     navigation.navigate('Home');
   };
 
@@ -26,7 +30,6 @@ class LoginScreen extends Component {
   };
 
   render() {
-    const {email, password} = this.state;
     return (
       <View style={styles.loginScreenMainView}>
         <View style={styles.loginScreenContentView}>
@@ -38,7 +41,7 @@ class LoginScreen extends Component {
           <View style={styles.loginScreenInputsView}>
             <Reinput
               label="Email"
-              onChange={value => {
+              onChangeText={value => {
                 this.setState({
                   email: value,
                 });
@@ -46,7 +49,7 @@ class LoginScreen extends Component {
             />
             <Reinput
               label="Password"
-              onChange={value => {
+              onChangeText={value => {
                 this.setState({
                   password: value,
                 });
