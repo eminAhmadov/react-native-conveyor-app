@@ -1,22 +1,52 @@
 import React, {Component} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, ActivityIndicator} from 'react-native';
 import Reinput from 'reinput';
 import {Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import {getUser} from '../../store/actions';
 import authService from '../../services/authentication/service';
 import styles from '../../styles/styles';
+import colors from '../../styles/colors';
 
 const logoImage = require('../../assets/images/logo.png');
 
 class LoginScreen extends Component {
+  initialState = {
+    email: '',
+    emailValid: false,
+    emailError: '',
+    password: '',
+    passwordValid: false,
+    passwordError: '',
+    isButtonLoading: false,
+  };
+
+  state = {
+    ...this.initialState,
+  };
+
   onLoginButtonPressed = () => {
     const {email, password} = this.state;
     const {navigation, onLogin} = this.props;
-    authService.login(email, password).then(res => {
-      onLogin(res);
-    });
-    navigation.navigate('Home');
+    this.setState(
+      {
+        isButtonLoading: true,
+      },
+      () => {
+        authService
+          .login(email, password)
+          .catch(err => {
+            this.setState({
+              ...this.initialState,
+            });
+            alert(err.message);
+          })
+          .then(res => {
+            onLogin(res);
+            navigation.navigate('Home');
+          });
+      },
+    );
   };
 
   onRegisterButtonPressed = () => {
@@ -24,12 +54,47 @@ class LoginScreen extends Component {
     navigation.navigate('Registration');
   };
 
-  state = {
-    email: '',
-    password: '',
+  validateEmail = () => {
+    const {email} = this.state;
+    var emailRegex = /\S+@\S+\.\S+/;
+    if (emailRegex.test(email)) {
+      this.setState({
+        emailValid: true,
+        emailError: '',
+      });
+    } else {
+      this.setState({
+        emailValid: false,
+        emailError: 'Should match email format',
+      });
+    }
+  };
+
+  validatePassword = () => {
+    const {password} = this.state;
+    if (password.length >= 8) {
+      this.setState({
+        passwordValid: true,
+        passwordError: '',
+      });
+    } else {
+      this.setState({
+        passwordValid: false,
+        passwordError: 'Should not be shorter that 8 characters',
+      });
+    }
   };
 
   render() {
+    const {
+      email,
+      password,
+      emailValid,
+      emailError,
+      passwordValid,
+      passwordError,
+      isButtonLoading,
+    } = this.state;
     return (
       <View style={styles.loginScreenMainView}>
         <View style={styles.loginScreenContentView}>
@@ -41,27 +106,62 @@ class LoginScreen extends Component {
           <View style={styles.loginScreenInputsView}>
             <Reinput
               label="Email"
+              value={email}
+              autoCapitalize="none"
+              // activeColor={colors.INPUT_FIELD_ACTIVE}
+              // color={colors.INPUT_FIELD_TEXT}
+              // labelActiveColor={colors.INPUT_FIELD_INACTIVE}
+              // labelColor={colors.INPUT_FIELD_INACTIVE}
+              error={emailError}
               onChangeText={value => {
                 this.setState({
                   email: value,
+                  emailValid: false,
+                  emailError: '',
                 });
+              }}
+              onBlur={() => {
+                this.validateEmail();
               }}
             />
             <Reinput
               label="Password"
+              value={password}
+              autoCapitalize="none"
+              secureTextEntry={true}
+              error={passwordError}
               onChangeText={value => {
                 this.setState({
                   password: value,
+                  passwordValid: false,
+                  passwordError: '',
                 });
+              }}
+              onBlur={() => {
+                this.validatePassword();
               }}
             />
           </View>
           <View style={styles.loginScreenButtonsView}>
             <Button
               rounded
-              style={styles.loginScreenLoginButton}
+              disabled={!emailValid || !passwordValid}
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{
+                ...styles.loginScreenLoginButton,
+                backgroundColor:
+                  !emailValid || !passwordValid
+                    ? colors.ROUNDED_BUTTON_COLOR_DISABLED
+                    : colors.ACCENT_COLOR,
+              }}
               onPress={this.onLoginButtonPressed}>
-              <Text style={styles.loginScreenLoginButtonText}>Login</Text>
+              {isButtonLoading ? (
+                <View>
+                  <ActivityIndicator size="large" color="white" />
+                </View>
+              ) : (
+                <Text style={styles.loginScreenLoginButtonText}>Login</Text>
+              )}
             </Button>
             <Button
               transparent
