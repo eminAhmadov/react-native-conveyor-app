@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, ActivityIndicator} from 'react-native';
 import {View} from 'native-base';
 import styles from '../../styles/styles';
+import colors from '../../styles/colors';
 
 const LoadMore = ({
   isLoading = false,
@@ -11,7 +12,7 @@ const LoadMore = ({
   <View style={styles.loadMoreView}>
     {isLoading ? (
       <View>
-        <ActivityIndicator size="large" color="orange" />
+        <ActivityIndicator size="large" color={colors.ACCENT_COLOR} />
       </View>
     ) : hasMoreToLoad ? (
       <View style={styles.loadMoreTextWrapper}>
