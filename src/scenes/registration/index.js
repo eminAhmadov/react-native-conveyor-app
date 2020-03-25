@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, ActivityIndicator, Alert} from 'react-native';
 import Reinput from 'reinput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {Button, Text} from 'native-base';
 import ModalSelector from 'react-native-modal-selector';
+import authService from '../../services/authentication/service';
 import data from '../../utils/genders';
 import styles from '../../styles/styles';
 import colors from '../../styles/colors';
@@ -37,6 +38,7 @@ class RegistrationScreen extends Component {
     mobile: '',
     mobileValid: false,
     mobileError: '',
+    isButtonLoading: false,
   };
 
   validateFirstName = () => {
@@ -72,7 +74,12 @@ class RegistrationScreen extends Component {
   validateEmail = () => {
     const {email} = this.state;
     var emailRegex = /\S+@\S+\.\S+/;
-    if (emailRegex.test(email)) {
+    if (email.length <= 5) {
+      this.setState({
+        emailValid: false,
+        emailError: 'Should not be shorter than 6 characters',
+      });
+    } else if (emailRegex.test(email)) {
       this.setState({
         emailValid: true,
         emailError: '',
@@ -162,6 +169,69 @@ class RegistrationScreen extends Component {
     }
   };
 
+  onRegistrationButtonPressed = () => {
+    const {
+      firstName,
+      lastName,
+      gender,
+      email,
+      password,
+      facebook,
+      instagram,
+      mobile,
+    } = this.state;
+    const {navigation} = this.props;
+    this.setState(
+      {
+        isButtonLoading: true,
+      },
+      () => {
+        authService
+          .register(
+            `${firstName} ${lastName}`,
+            email,
+            password,
+            gender.toLocaleLowerCase(),
+            facebook,
+            instagram,
+            mobile,
+          )
+          .then(res => {
+            // onLogin(res);
+            console.log(res);
+            this.setState(
+              {
+                isButtonLoading: false,
+              },
+              () => {
+                Alert.alert(
+                  'Success!',
+                  `Created user with id: ${res.user}`,
+                  [{text: 'OK', onPress: () => navigation.navigate('Login')}],
+                  {cancelable: false},
+                );
+              },
+            );
+          })
+          .catch(err => {
+            this.setState(
+              {
+                isButtonLoading: false,
+              },
+              () => {
+                Alert.alert(
+                  'Failure!',
+                  err.message,
+                  [{text: 'OK', onPress: () => {}}],
+                  {cancelable: false},
+                );
+              },
+            );
+          });
+      },
+    );
+  };
+
   render() {
     const {
       firstName,
@@ -189,6 +259,7 @@ class RegistrationScreen extends Component {
       mobile,
       mobileValid,
       mobileError,
+      isButtonLoading,
     } = this.state;
     const {navigation} = this.props;
     return (
@@ -372,12 +443,16 @@ class RegistrationScreen extends Component {
                       ? colors.ROUNDED_BUTTON_COLOR_DISABLED
                       : colors.ACCENT_COLOR,
                 }}
-                onPress={() => {
-                  console.log('pressed');
-                }}>
-                <Text style={styles.registrationScreenRegisterButtonText}>
-                  Register
-                </Text>
+                onPress={this.onRegistrationButtonPressed}>
+                {isButtonLoading ? (
+                  <View>
+                    <ActivityIndicator size="large" color="white" />
+                  </View>
+                ) : (
+                  <Text style={styles.registrationScreenRegisterButtonText}>
+                    Register
+                  </Text>
+                )}
               </Button>
               <Button
                 transparent

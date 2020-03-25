@@ -40,11 +40,10 @@ const api = {
     }).then(res => {
       if (res.ok) {
         return res.json();
-      } else if (res.status === 401) {
+      } else if (res.status === 409) {
         throw new Error('User with this email already exists!');
-      } else {
-        throw new Error(res.statusText);
       }
+      throw new Error('Could not register a user with this email!');
     });
   },
 };
