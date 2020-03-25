@@ -115,7 +115,7 @@ class LoginScreen extends Component {
               error={emailError}
               onChangeText={value => {
                 this.setState({
-                  email: value,
+                  email: value.replace(/\s/g, ''),
                   emailValid: false,
                   emailError: '',
                 });
@@ -132,7 +132,7 @@ class LoginScreen extends Component {
               error={passwordError}
               onChangeText={value => {
                 this.setState({
-                  password: value,
+                  password: value.replace(/\s/g, ''),
                   passwordValid: false,
                   passwordError: '',
                 });
