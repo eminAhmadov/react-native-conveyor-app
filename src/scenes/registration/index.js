@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {ScrollView, View, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import Reinput from 'reinput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {Button, Text} from 'native-base';
+import ModalSelector from 'react-native-modal-selector';
+import data from '../../utils/genders';
 import styles from '../../styles/styles';
 import colors from '../../styles/colors';
 
@@ -16,6 +18,7 @@ class RegistrationScreen extends Component {
     lastName: '',
     lastNameValid: false,
     lastNameError: '',
+    gender: '',
     email: '',
     emailValid: false,
     emailError: '',
@@ -167,6 +170,7 @@ class RegistrationScreen extends Component {
       lastName,
       lastNameValid,
       lastNameError,
+      gender,
       email,
       emailValid,
       emailError,
@@ -227,6 +231,19 @@ class RegistrationScreen extends Component {
                   this.validateLastName();
                 }}
               />
+              <ModalSelector
+                data={data}
+                animationType="fade"
+                overlayStyle={{backgroundColor: colors.MODAL_OVERLAY_COLOR}}
+                accessible={true}
+                optionContainerStyle={{
+                  backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+                }}
+                onChange={option => {
+                  this.setState({gender: option.label});
+                }}>
+                <Reinput label="Gender" value={gender} />
+              </ModalSelector>
               <Reinput
                 label="Email"
                 value={email}
@@ -332,6 +349,7 @@ class RegistrationScreen extends Component {
                 disabled={
                   !firstNameValid ||
                   !lastNameValid ||
+                  !gender ||
                   !emailValid ||
                   !passwordValid ||
                   !confirmPasswordValid ||
@@ -344,6 +362,7 @@ class RegistrationScreen extends Component {
                   backgroundColor:
                     !firstNameValid ||
                     !lastNameValid ||
+                    !gender ||
                     !emailValid ||
                     !passwordValid ||
                     !confirmPasswordValid ||
