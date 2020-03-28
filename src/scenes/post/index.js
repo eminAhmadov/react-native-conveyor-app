@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Switch, Text} from 'react-native';
 import {ReinputButton} from 'reinput';
 import Reinput from 'reinput';
-import {Drawer, Item, Input, Button} from 'native-base';
+import {Drawer, Icon, Button} from 'native-base';
 import HeaderMain from '../../components/organisms/header-main';
 import UserPromo from '../../components/molecules/user-promo';
-import {scaleSize} from '../../styles/mixins';
+import styles from '../../styles/styles';
+import colors from '../../styles/colors';
 import Sidebar from '../sidebar';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ModalSelector from 'react-native-modal-selector';
@@ -63,111 +64,130 @@ export default class PostScreen extends React.Component {
         }}
         content={<Sidebar />}
         onClose={() => this.closeDrawer()}>
-        <View
-          style={{height: '100%', width: '100%', backgroundColor: '#45beff'}}>
+        <View style={styles.postScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
-          <View
-            style={{
-              height: '100%',
-              width: '90%',
-              alignSelf: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                height: scaleSize(320),
-                width: '100%',
-                padding: '3%',
-                justifyContent: 'center',
-                backgroundColor: 'white',
-                marginBottom: 40,
-                borderColor: '#008bdb',
-                borderWidth: 4,
-                borderRadius: 20,
-              }}>
-              <View
-                style={{
-                  height: '40%',
-                  width: '100%',
-                }}>
-                <UserPromo image={userImage} name={'Emin Ahmadov'} />
-              </View>
-              <View
-                style={{
-                  height: '60%',
-                  width: '80%',
-                  alignSelf: 'center',
-                  justifyContent: 'space-between',
-                }}>
-                <ModalSelector
-                  data={data}
-                  animationType="fade"
-                  overlayStyle={{backgroundColor: 'rgba(0,0,0,0.7)'}}
-                  accessible={true}
-                  style={{height: 50}}
-                  optionContainerStyle={{backgroundColor: 'white'}}
-                  onChange={option => {
-                    this.setState({from: option.label});
-                  }}>
-                  <Reinput label="From" value={from} />
-                </ModalSelector>
-                <ModalSelector
-                  data={data}
-                  animationType="fade"
-                  overlayStyle={{backgroundColor: 'rgba(0,0,0,0.7)'}}
-                  accessible={true}
-                  style={{height: 50}}
-                  optionContainerStyle={{backgroundColor: 'white'}}
-                  onChange={option => {
-                    this.setState({to: option.label});
-                  }}>
-                  <Reinput label="To" value={to} />
-                </ModalSelector>
-                <ReinputButton
-                  label="Date"
-                  value={dateToDisplay}
-                  onPress={() => {
-                    this.showDatePicker();
-                  }}
-                  style={{height: 50}}
-                />
-                <Reinput
-                  label="Comment"
-                  value={comment}
-                  onChangeText={value => {
-                    this.setState({
-                      comment: value,
-                    });
-                  }}
-                />
+          <View style={styles.postScreenContentView}>
+            <View style={styles.postScreenTravelDetailView}>
+              <View style={styles.postScreenTravelDetailBorderedContainer}>
+                <View style={styles.postScreenUserPromoContainer}>
+                  <UserPromo image={userImage} name={'Emin Ahmadov'} />
+                </View>
+                <View style={styles.postScreenInputFormsContainer}>
+                  <View>
+                    <ModalSelector
+                      data={data}
+                      animationType="fade"
+                      overlayStyle={{
+                        backgroundColor: colors.MODAL_OVERLAY_COLOR,
+                      }}
+                      accessible={true}
+                      // eslint-disable-next-line react-native/no-inline-styles
+                      style={{height: 50}}
+                      optionContainerStyle={{
+                        backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+                      }}
+                      onChange={option => {
+                        this.setState({from: option.label});
+                      }}>
+                      <Reinput label="From" value={from} />
+                    </ModalSelector>
+                    <ModalSelector
+                      data={data}
+                      animationType="fade"
+                      overlayStyle={{
+                        backgroundColor: colors.MODAL_OVERLAY_COLOR,
+                      }}
+                      accessible={true}
+                      // eslint-disable-next-line react-native/no-inline-styles
+                      style={{height: 50}}
+                      optionContainerStyle={{
+                        backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+                      }}
+                      onChange={option => {
+                        this.setState({to: option.label});
+                      }}>
+                      <Reinput label="To" value={to} />
+                    </ModalSelector>
+                    <ReinputButton
+                      label="Date"
+                      value={dateToDisplay}
+                      onPress={() => {
+                        this.showDatePicker();
+                      }}
+                      // eslint-disable-next-line react-native/no-inline-styles
+                      style={{height: 50}}
+                    />
+                    <Reinput
+                      label="Comment"
+                      value={comment}
+                      onChangeText={value => {
+                        this.setState({
+                          comment: value,
+                        });
+                      }}
+                    />
+                  </View>
+                  <View style={styles.postScreenContactsToIncludeContainer}>
+                    <Text style={styles.postScreenContactsToIncludeText}>
+                      Contacts to include:
+                    </Text>
+                  </View>
+                  <View style={styles.postScreenContactsSwitchesContainer}>
+                    <View>
+                      <Switch
+                        value={true}
+                        style={styles.postScreenContactsSwitch}
+                        onValueChange={value => {}}
+                      />
+                      <Icon
+                        style={{
+                          ...styles.postScreenContactsIcon,
+                          color: colors.ACCENT_COLOR,
+                        }}
+                        type="FontAwesome"
+                        name="facebook-square"
+                      />
+                    </View>
+                    <View>
+                      <Switch
+                        value={true}
+                        style={styles.postScreenContactsSwitch}
+                        onValueChange={value => {}}
+                      />
+                      <Icon
+                        style={{
+                          ...styles.postScreenContactsIcon,
+                          color: colors.ACCENT_COLOR,
+                        }}
+                        type="FontAwesome"
+                        name="instagram"
+                      />
+                    </View>
+                    <View>
+                      <Switch
+                        value={true}
+                        style={styles.postScreenContactsSwitch}
+                        onValueChange={value => {}}
+                      />
+                      <Icon
+                        style={{
+                          ...styles.postScreenContactsIcon,
+                          color: colors.ACCENT_COLOR,
+                        }}
+                        type="FontAwesome"
+                        name="phone-square"
+                      />
+                    </View>
+                  </View>
+                </View>
               </View>
             </View>
-            <View
-              style={{
-                height: '15%',
-                width: '100%',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+            <View style={styles.postScreenPostButtonView}>
               <Button
                 rounded
-                style={{
-                  borderRadius: 20,
-                  width: '50%',
-                  justifyContent: 'center',
-                  backgroundColor: 'orange',
-                }}
+                style={styles.postScreenPostButton}
                 onPress={() => {}}>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    fontSize: 20,
-                    color: 'white',
-                  }}>
-                  Post
-                </Text>
+                <Text style={styles.postScreenPostButtonText}>Post</Text>
               </Button>
             </View>
           </View>

@@ -124,6 +124,68 @@ const styles = {
   registrationScreenCancelButtonText: {
     color: colors.TEXT_BUTTON_COLOR,
   },
+  postScreenMainView: {
+    ...commonScreenMainView,
+  },
+  postScreenContentView: {
+    height: '95%',
+    width: '100%',
+    padding: '2.5%',
+  },
+  postScreenTravelDetailView: {
+    flex: 4,
+    justifyContent: 'center',
+  },
+  postScreenTravelDetailBorderedContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+    borderColor: colors.BORDER_COLOR_DARK,
+    borderWidth: 4,
+    borderRadius: 20,
+  },
+  postScreenUserPromoContainer: {
+    height: '25%',
+    width: '100%',
+  },
+  postScreenInputFormsContainer: {
+    height: '75%',
+    width: '80%',
+    alignSelf: 'center',
+  },
+  postScreenContactsToIncludeContainer: {
+    marginTop: '-10%',
+    marginBottom: '4%',
+    alignItems: 'center',
+  },
+  postScreenContactsToIncludeText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  postScreenContactsSwitchesContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  postScreenContactsSwitch: {
+    transform: [{scaleX: 0.725}, {scaleY: 0.725}],
+  },
+  postScreenContactsIcon: {
+    fontSize: 50,
+    textAlign: 'center',
+  },
+  postScreenPostButtonView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  postScreenPostButton: {
+    ...commonRoundedButton,
+    width: '50%',
+  },
+  postScreenPostButtonText: {
+    ...commonRoundedButtonText,
+  },
   searchScreenMainView: {
     ...commonScreenMainView,
   },
