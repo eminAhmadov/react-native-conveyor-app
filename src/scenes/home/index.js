@@ -11,6 +11,37 @@ import LoadMore from '../../components/organisms/load-more';
 const userImageMale = require('../../assets/images/user_male.png');
 const userImageFemale = require('../../assets/images/user_female.png');
 export default class HomeScreen extends React.Component {
+  initialState = {
+    list: [{title: '0', data: []}],
+    offset: 0,
+    limit: 10,
+    isFetching: false,
+    hasMoreToLoad: true,
+  };
+
+  componentDidMount() {
+    this.fetchResult();
+    this.didFocusSubscription = this.props.navigation.addListener(
+      'didFocus',
+      this.didFocusAction,
+    );
+  }
+
+  componentWillUmount() {
+    this.didFocusSubscription.remove();
+  }
+
+  didFocusAction = () => {
+    this.setState(
+      {
+        ...this.initialState,
+      },
+      () => {
+        this.fetchResult();
+      },
+    );
+  };
+
   closeDrawer = () => {
     this.drawer._root.close();
   };
@@ -18,10 +49,6 @@ export default class HomeScreen extends React.Component {
   openDrawer = () => {
     this.drawer._root.open();
   };
-
-  componentDidMount() {
-    this.fetchResult();
-  }
 
   fetchResult = () => {
     const {offset, limit, list} = this.state;
@@ -57,11 +84,7 @@ export default class HomeScreen extends React.Component {
   };
 
   state = {
-    list: [{title: '0', data: []}],
-    offset: 0,
-    limit: 10,
-    isFetching: false,
-    hasMoreToLoad: true,
+    ...this.initialState,
   };
 
   getUserImage = item => {

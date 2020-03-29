@@ -49,6 +49,55 @@ const api = {
       },
     ).then(res => res.json());
   },
+  createTravel(
+    userId,
+    name,
+    gender,
+    origin,
+    destination,
+    date,
+    comment,
+    facebook,
+    instagram,
+    phone,
+  ) {
+    const body = {
+      userId: userId,
+      name: name,
+      gender: gender,
+      origin: origin,
+      destination: destination,
+      date: date,
+    };
+    if (comment) {
+      body.comment = comment;
+    }
+    if (facebook) {
+      body.facebook = facebook;
+    }
+    if (instagram) {
+      body.instagram = instagram;
+    }
+    if (phone) {
+      body.mobile = phone;
+    }
+    console.log(body);
+    return fetch(`${API_BASE}/create`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      } else if (res.status === 409) {
+        throw new Error('Such travel already exists!');
+      }
+      throw new Error('Could not post a travel!');
+    });
+  },
 };
 
 export default api;

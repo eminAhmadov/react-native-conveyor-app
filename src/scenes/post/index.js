@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Switch, Text} from 'react-native';
+import {View, Switch, Text, Alert, ActivityIndicator} from 'react-native';
 import {ReinputButton} from 'reinput';
 import Reinput from 'reinput';
 import {Drawer, Icon, Button} from 'native-base';
@@ -11,10 +11,26 @@ import Sidebar from '../sidebar';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ModalSelector from 'react-native-modal-selector';
 import data from '../../utils/cities';
+import {connect} from 'react-redux';
+import travelService from '../../services/travel/service';
 
-const userImage = require('../../assets/images/user_male.png');
+const userImageMale = require('../../assets/images/user_male.png');
+const userImageFemale = require('../../assets/images/user_female.png');
 
-export default class PostScreen extends React.Component {
+class PostScreen extends React.Component {
+  initialState = {
+    isDatePickerVisible: false,
+    from: '',
+    to: '',
+    date: '',
+    dateToDisplay: '',
+    comment: '',
+    includeFacebook: false,
+    includeInstagram: false,
+    includePhone: false,
+    isButtonLoading: false,
+  };
+
   closeDrawer = () => {
     this.drawer._root.close();
   };
@@ -45,18 +61,114 @@ export default class PostScreen extends React.Component {
     this.hideDatePicker();
   };
 
+  formatDate = date => {
+    let month = '' + (date.getMonth() + 1);
+    let day = '' + date.getDate();
+    let year = date.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+  };
+
+  onPostButtonPressed = () => {
+    const {
+      from,
+      to,
+      date,
+      comment,
+      includeFacebook,
+      includeInstagram,
+      includePhone,
+    } = this.state;
+    const {user} = this.props;
+    const dateFormatted = this.formatDate(date);
+    const commentText = comment ? comment : null;
+    const facebook = includeFacebook ? user.facebook : null;
+    const instagram = includeInstagram ? user.instagram : null;
+    const phone = includePhone ? user.mobile : null;
+    this.setState(
+      {
+        isButtonLoading: true,
+      },
+      () => {
+        travelService
+          .createTravel(
+            user._id,
+            user.name,
+            user.gender,
+            from,
+            to,
+            dateFormatted,
+            commentText,
+            facebook,
+            instagram,
+            phone,
+          )
+          .then(res => {
+            console.log(res);
+            this.setState(
+              {
+                isButtonLoading: false,
+              },
+              () => {
+                Alert.alert(
+                  'Success!',
+                  `Created post with id: ${res.id}`,
+                  [
+                    {
+                      text: 'OK',
+                      onPress: () => {
+                        this.setState({...this.initialState});
+                      },
+                    },
+                  ],
+                  {cancelable: false},
+                );
+              },
+            );
+          })
+          .catch(err => {
+            this.setState(
+              {
+                isButtonLoading: false,
+              },
+              () => {
+                Alert.alert(
+                  'Failure!',
+                  err.message,
+                  [{text: 'OK', onPress: () => {}}],
+                  {cancelable: false},
+                );
+              },
+            );
+          });
+      },
+    );
+  };
+
   state = {
-    isDatePickerVisible: false,
-    from: '',
-    to: '',
-    date: '',
-    dateToDisplay: '',
-    comment: '',
+    ...this.initialState,
   };
 
   render() {
-    const {isDatePickerVisible, from, to, dateToDisplay, comment} = this.state;
-    const {navigation} = this.props;
+    const {
+      isDatePickerVisible,
+      from,
+      to,
+      dateToDisplay,
+      comment,
+      includeFacebook,
+      includeInstagram,
+      includePhone,
+      isButtonLoading,
+    } = this.state;
+    const {navigation, user} = this.props;
     return (
       <Drawer
         ref={ref => {
@@ -70,7 +182,12 @@ export default class PostScreen extends React.Component {
             <View style={styles.postScreenTravelDetailView}>
               <View style={styles.postScreenTravelDetailBorderedContainer}>
                 <View style={styles.postScreenUserPromoContainer}>
-                  <UserPromo image={userImage} name={'Emin Ahmadov'} />
+                  <UserPromo
+                    image={
+                      user.gender === 'male' ? userImageMale : userImageFemale
+                    }
+                    name={user.name}
+                  />
                 </View>
                 <View style={styles.postScreenInputFormsContainer}>
                   <View>
@@ -135,14 +252,29 @@ export default class PostScreen extends React.Component {
                   <View style={styles.postScreenContactsSwitchesContainer}>
                     <View>
                       <Switch
-                        value={true}
+                        value={includeFacebook}
                         style={styles.postScreenContactsSwitch}
-                        onValueChange={value => {}}
+                        trackColor={{
+                          false: colors.SWITCH_TRACK_DISABLED_COLOR,
+                          true: colors.SWITCH_TRACK_ENABLED_COLOR,
+                        }}
+                        thumbColor={
+                          includeFacebook
+                            ? colors.SWITCH_THUMB_ENABLED_COLOR
+                            : colors.SWITCH_THUMB_DISABLED_COLOR
+                        }
+                        onValueChange={value => {
+                          this.setState({
+                            includeFacebook: value,
+                          });
+                        }}
                       />
                       <Icon
                         style={{
                           ...styles.postScreenContactsIcon,
-                          color: colors.ACCENT_COLOR,
+                          color: includeFacebook
+                            ? colors.CONTACT_ICON_FACEBOOK
+                            : colors.CONTACT_ICON_DISABLED,
                         }}
                         type="FontAwesome"
                         name="facebook-square"
@@ -150,14 +282,29 @@ export default class PostScreen extends React.Component {
                     </View>
                     <View>
                       <Switch
-                        value={true}
+                        value={includeInstagram}
                         style={styles.postScreenContactsSwitch}
-                        onValueChange={value => {}}
+                        trackColor={{
+                          false: colors.SWITCH_TRACK_DISABLED_COLOR,
+                          true: colors.SWITCH_TRACK_ENABLED_COLOR,
+                        }}
+                        thumbColor={
+                          includeInstagram
+                            ? colors.SWITCH_THUMB_ENABLED_COLOR
+                            : colors.SWITCH_THUMB_DISABLED_COLOR
+                        }
+                        onValueChange={value => {
+                          this.setState({
+                            includeInstagram: value,
+                          });
+                        }}
                       />
                       <Icon
                         style={{
                           ...styles.postScreenContactsIcon,
-                          color: colors.ACCENT_COLOR,
+                          color: includeInstagram
+                            ? colors.CONTACT_ICON_INSTAGRAM
+                            : colors.CONTACT_ICON_DISABLED,
                         }}
                         type="FontAwesome"
                         name="instagram"
@@ -165,14 +312,29 @@ export default class PostScreen extends React.Component {
                     </View>
                     <View>
                       <Switch
-                        value={true}
+                        value={includePhone}
                         style={styles.postScreenContactsSwitch}
-                        onValueChange={value => {}}
+                        trackColor={{
+                          false: colors.SWITCH_TRACK_DISABLED_COLOR,
+                          true: colors.SWITCH_TRACK_ENABLED_COLOR,
+                        }}
+                        thumbColor={
+                          includePhone
+                            ? colors.SWITCH_THUMB_ENABLED_COLOR
+                            : colors.SWITCH_THUMB_DISABLED_COLOR
+                        }
+                        onValueChange={value => {
+                          this.setState({
+                            includePhone: value,
+                          });
+                        }}
                       />
                       <Icon
                         style={{
                           ...styles.postScreenContactsIcon,
-                          color: colors.ACCENT_COLOR,
+                          color: includePhone
+                            ? colors.CONTACT_ICON_PHONE
+                            : colors.CONTACT_ICON_DISABLED,
                         }}
                         type="FontAwesome"
                         name="phone-square"
@@ -185,9 +347,30 @@ export default class PostScreen extends React.Component {
             <View style={styles.postScreenPostButtonView}>
               <Button
                 rounded
-                style={styles.postScreenPostButton}
-                onPress={() => {}}>
-                <Text style={styles.postScreenPostButtonText}>Post</Text>
+                disabled={
+                  from === '' ||
+                  to === '' ||
+                  dateToDisplay === '' ||
+                  !(includeFacebook || includeInstagram || includePhone)
+                }
+                style={{
+                  ...styles.postScreenPostButton,
+                  backgroundColor:
+                    from === '' ||
+                    to === '' ||
+                    dateToDisplay === '' ||
+                    !(includeFacebook || includeInstagram || includePhone)
+                      ? colors.ROUNDED_BUTTON_COLOR_DISABLED
+                      : colors.ACCENT_COLOR,
+                }}
+                onPress={this.onPostButtonPressed}>
+                {isButtonLoading ? (
+                  <View>
+                    <ActivityIndicator size="large" color="white" />
+                  </View>
+                ) : (
+                  <Text style={styles.postScreenPostButtonText}>Post</Text>
+                )}
               </Button>
             </View>
           </View>
@@ -202,3 +385,10 @@ export default class PostScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const {user} = state;
+  return {user};
+};
+
+export default connect(mapStateToProps)(PostScreen);

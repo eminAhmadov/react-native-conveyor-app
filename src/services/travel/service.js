@@ -37,6 +37,31 @@ const service = {
       limit,
     );
   },
+  createTravel(
+    userId,
+    name,
+    gender,
+    origin,
+    destination,
+    date,
+    comment,
+    facebook,
+    instagram,
+    phone,
+  ) {
+    return api.createTravel(
+      userId,
+      name,
+      gender,
+      origin,
+      destination,
+      date,
+      comment,
+      facebook,
+      instagram,
+      phone,
+    );
+  },
 };
 
 export default service;
