@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080';
+const API_BASE = 'http://192.168.1.102:8080';
 
 const api = {
   listAllTravels(offset, limit) {

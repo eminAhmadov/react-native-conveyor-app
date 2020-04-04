@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'http://192.168.1.102:3000';
 
 const api = {
   login(email, password) {
