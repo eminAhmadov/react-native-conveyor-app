@@ -5,6 +5,7 @@ import {Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import {getUser, getPushNotId} from '../../store/actions';
 import authService from '../../services/authentication/service';
+import notificationService from '../../services/notification/service';
 import styles from '../../styles/styles';
 import colors from '../../styles/colors';
 import OneSignal from 'react-native-onesignal';
@@ -72,13 +73,14 @@ class LoginScreen extends Component {
             this.setState({
               ...this.initialState,
             });
+            // eslint-disable-next-line no-alert
             alert(err.message);
           })
           .then(res => {
             onLogin(res);
-            console.log(res);
-            console.log(pushNotId);
-            navigation.navigate('Home');
+            notificationService.addUser(res._id, pushNotId).then(() => {
+              navigation.navigate('Home');
+            });
           });
       },
     );
