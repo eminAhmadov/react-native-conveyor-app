@@ -3,10 +3,11 @@ import {View, Image, ActivityIndicator} from 'react-native';
 import Reinput from 'reinput';
 import {Button, Text} from 'native-base';
 import {connect} from 'react-redux';
-import {getUser} from '../../store/actions';
+import {getUser, getPushNotId} from '../../store/actions';
 import authService from '../../services/authentication/service';
 import styles from '../../styles/styles';
 import colors from '../../styles/colors';
+import OneSignal from 'react-native-onesignal';
 
 const logoImage = require('../../assets/images/logo.png');
 
@@ -21,13 +22,45 @@ class LoginScreen extends Component {
     isButtonLoading: false,
   };
 
+  componentDidMount() {
+    OneSignal.init('ca7820f2-1c22-4331-a91a-4c9f0ed68419', {
+      kOSSettingsKeyAutoPrompt: true,
+    }); // set kOSSettingsKeyAutoPrompt to false prompting manually on iOS
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+  onReceived = notification => {
+    console.log('Notification received: ', notification);
+  };
+
+  onOpened = openResult => {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  };
+
+  onIds = device => {
+    const {onOneSignalInit} = this.props;
+    console.log('Device info: ', device);
+    onOneSignalInit(device.userId);
+  };
+
   state = {
     ...this.initialState,
   };
 
   onLoginButtonPressed = () => {
     const {email, password} = this.state;
-    const {navigation, onLogin} = this.props;
+    const {navigation, onLogin, pushNotId} = this.props;
     this.setState(
       {
         isButtonLoading: true,
@@ -43,6 +76,8 @@ class LoginScreen extends Component {
           })
           .then(res => {
             onLogin(res);
+            console.log(res);
+            console.log(pushNotId);
             navigation.navigate('Home');
           });
       },
@@ -178,13 +213,21 @@ class LoginScreen extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  const {pushNotId} = state;
+  return {pushNotId};
+};
+
 const mapDispatchToProps = dispatch => ({
   onLogin: user => {
     dispatch(getUser(user));
   },
+  onOneSignalInit: pushNotId => {
+    dispatch(getPushNotId(pushNotId));
+  },
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(LoginScreen);
