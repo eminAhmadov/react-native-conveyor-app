@@ -197,6 +197,21 @@ const styles = {
     width: '100%',
     alignItems: 'center',
   },
+  notificationsScreenMainView: {
+    ...commonScreenMainView,
+  },
+  notificationsScreenScrollView: {
+    width: '100%',
+    height: '100%',
+  },
+  notificationsScreenScrollViewContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  notificationsScreenSectionListContainer: {
+    width: '180%',
+    alignItems: 'center',
+  },
   sidebarContainer: {
     backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
     paddingTop: 40,
@@ -387,6 +402,27 @@ const styles = {
   travelPromoDetailsCommentText: {
     width: '60%',
     textAlign: 'right',
+  },
+  notificationView: {
+    width: '100%',
+    borderRadius: 20,
+    borderWidth: 5,
+    borderColor: colors.BORDER_COLOR_DARK,
+    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+    marginVertical: 4,
+  },
+  notificationContent: {
+    height: scaleSize(100),
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: '5%',
+  },
+  notificationMainText: {
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  notificationBoldText: {
+    fontWeight: '800',
   },
 };
 
