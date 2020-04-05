@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {Header, Left, Body, Right, Button, Icon} from 'native-base';
 import styles from '../../styles/styles';
 
-const HeaderMain = ({openDrawer}) => (
+const HeaderMain = ({openDrawer, navigation}) => (
   <View style={styles.headerView}>
     <Header style={styles.header}>
       <Left style={styles.headerLeft}>
@@ -19,7 +19,11 @@ const HeaderMain = ({openDrawer}) => (
         <Text style={styles.headerTitle}>Conveyor</Text>
       </Body>
       <Right style={styles.headerReght}>
-        <Button onPress={() => {}} transparent>
+        <Button
+          onPress={() => {
+            navigation.navigate('Notifications');
+          }}
+          transparent>
           <Icon
             style={styles.headerIcon}
             type="MaterialIcons"
