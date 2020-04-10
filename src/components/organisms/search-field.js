@@ -95,7 +95,7 @@ class SearchField extends React.Component {
       toDate,
       toDateToDisplay,
     } = this.state;
-    const {onSearchPressed} = this.props;
+    const {onSearchPressed, onSetNotificationAlertPressed} = this.props;
     return (
       <View style={styles.searchFieldMainView}>
         <View style={styles.searchFieldTopRow}>
@@ -190,8 +190,24 @@ class SearchField extends React.Component {
         <View style={styles.searchFieldBottomRow}>
           <Button
             rounded
-            style={styles.searchFieldSetNotificationAlertButton}
-            onPress={() => {}}>
+            disabled={
+              from === '' || to === '' || fromDate === '' || toDate === ''
+            }
+            style={{
+              ...styles.searchFieldSetNotificationAlertButton,
+              backgroundColor:
+                from === '' || to === '' || fromDate === '' || toDate === ''
+                  ? colors.ROUNDED_BUTTON_COLOR_DISABLED
+                  : colors.ACCENT_COLOR,
+            }}
+            onPress={() =>
+              onSetNotificationAlertPressed(
+                from,
+                to,
+                this.formatDate(fromDate),
+                this.formatDate(toDate),
+              )
+            }>
             <Text style={styles.searchFieldSetNotificationAlertButtonText}>
               Set Notification Alert
             </Text>

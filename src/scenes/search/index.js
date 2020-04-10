@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, SectionList} from 'react-native';
 import {Drawer} from 'native-base';
+import {connect} from 'react-redux';
 import HeaderMain from '../../components/organisms/header-main';
 import SearchField from '../../components/organisms/search-field';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -9,11 +10,12 @@ import Sidebar from '../sidebar';
 import LoadMore from '../../components/organisms/load-more';
 import styles from '../../styles/styles';
 import travelService from '../../services/travel/service';
+import notificationService from '../../services/notification/service';
 
 const userImageMale = require('../../assets/images/user_male.png');
 const userImageFemale = require('../../assets/images/user_female.png');
 
-export default class SearchScreen extends React.Component {
+class SearchScreen extends React.Component {
   closeDrawer = () => {
     this.drawer._root.close();
   };
@@ -32,6 +34,29 @@ export default class SearchScreen extends React.Component {
         this.fetchResult();
       },
     );
+  };
+
+  onSetNotificationAlertPressed = () => {
+    const {origin, destination, fromDate, toDate} = this.state;
+    const {user} = this.props;
+    notificationService
+      .createNotificationAlert(user._id, origin, destination, fromDate, toDate)
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          res.json().then(resJson => {
+            console.log(resJson);
+            alert(`Successfully set an alert with id: ${resJson.id}`);
+          });
+        } else {
+          res.json().then(resJson => console.log(resJson.error));
+          alert('Could not create an alert.');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        alert('Could not create an alert.');
+      });
   };
 
   fetchResult = () => {
@@ -248,6 +273,24 @@ export default class SearchScreen extends React.Component {
                 },
               );
             }}
+            onSetNotificationAlertPressed={(
+              origin,
+              destination,
+              fromDate,
+              toDate,
+            ) => {
+              this.setState(
+                {
+                  origin: origin,
+                  destination: destination,
+                  fromDate: fromDate,
+                  toDate: toDate,
+                },
+                () => {
+                  this.onSetNotificationAlertPressed();
+                },
+              );
+            }}
           />
           <ScrollView
             style={styles.searchScreenScrollViewStyle}
@@ -282,3 +325,10 @@ export default class SearchScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const {user} = state;
+  return {user};
+};
+
+export default connect(mapStateToProps)(SearchScreen);
