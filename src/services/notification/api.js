@@ -23,6 +23,28 @@ const api = {
       body: JSON.stringify(body),
     }).then(res => res.json());
   },
+  createNotificationAlert(
+    userId,
+    travelOrigin,
+    travelDestination,
+    travelDateFrom,
+    travelDateTo,
+  ) {
+    const body = {
+      travelOrigin: travelOrigin,
+      travelDestination: travelDestination,
+      travelDateFrom: travelDateFrom,
+      travelDateTo: travelDateTo,
+    };
+    return fetch(`${API_BASE}/notificationAlert/create?userId=${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+  },
 };
 
 export default api;

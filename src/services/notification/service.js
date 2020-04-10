@@ -7,6 +7,21 @@ const service = {
   addUser(userId, pushNotId) {
     return api.addUser(userId, pushNotId);
   },
+  createNotificationAlert(
+    userId,
+    travelOrigin,
+    travelDestination,
+    travelDateFrom,
+    travelDateTo,
+  ) {
+    return api.createNotificationAlert(
+      userId,
+      travelOrigin,
+      travelDestination,
+      travelDateFrom,
+      travelDateTo,
+    );
+  },
 };
 
 export default service;
