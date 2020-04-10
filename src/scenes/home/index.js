@@ -130,7 +130,7 @@ export default class HomeScreen extends React.Component {
         ref={ref => {
           this.drawer = ref;
         }}
-        content={<Sidebar />}
+        content={<Sidebar navigation={navigation} />}
         onClose={() => this.closeDrawer()}>
         <View style={styles.homeScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />

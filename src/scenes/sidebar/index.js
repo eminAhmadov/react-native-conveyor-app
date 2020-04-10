@@ -1,45 +1,25 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {Container, List, ListItem, Left, Body, Icon} from 'native-base';
+import {logOut} from '../../store/actions';
+import {connect} from 'react-redux';
 import styles from '../../styles/styles';
 
-export default class Sidebar extends React.Component {
+class Sidebar extends React.Component {
+  logOut = () => {
+    const {onLogOut, navigation} = this.props;
+    onLogOut();
+    navigation.navigate('Login');
+  };
+
   render() {
-    const {goToProfileSettings, goToPushnotAlertSettings, logOut} = this.props;
     return (
       <Container style={styles.sidebarContainer}>
         <List>
           <ListItem itemDivider>
-            <Text>Settings</Text>
-          </ListItem>
-          <ListItem button onPress={goToProfileSettings}>
-            <Left>
-              <Icon
-                type="MaterialCommunityIcons"
-                name="settings"
-                style={styles.sidebarListItemIcon}
-              />
-            </Left>
-            <Body>
-              <Text>Profile</Text>
-            </Body>
-          </ListItem>
-          <ListItem button onPress={goToPushnotAlertSettings}>
-            <Left>
-              <Icon
-                type="Ionicons"
-                name="md-notifications"
-                style={styles.sidebarListItemIcon}
-              />
-            </Left>
-            <Body>
-              <Text>Notification Alerts</Text>
-            </Body>
-          </ListItem>
-          <ListItem itemDivider>
             <Text>App</Text>
           </ListItem>
-          <ListItem button onPress={logOut}>
+          <ListItem button onPress={this.logOut}>
             <Left>
               <Icon
                 type="Entypo"
@@ -56,3 +36,14 @@ export default class Sidebar extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  onLogOut: () => {
+    dispatch(logOut());
+  },
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Sidebar);

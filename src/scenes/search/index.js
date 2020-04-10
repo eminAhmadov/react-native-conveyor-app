@@ -255,7 +255,7 @@ class SearchScreen extends React.Component {
         ref={ref => {
           this.drawer = ref;
         }}
-        content={<Sidebar />}
+        content={<Sidebar navigation={navigation} />}
         onClose={() => this.closeDrawer()}>
         <View style={styles.searchScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />

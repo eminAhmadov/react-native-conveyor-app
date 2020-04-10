@@ -174,7 +174,7 @@ class PostScreen extends React.Component {
         ref={ref => {
           this.drawer = ref;
         }}
-        content={<Sidebar />}
+        content={<Sidebar navigation={navigation} />}
         onClose={() => this.closeDrawer()}>
         <View style={styles.postScreenMainView}>
           <HeaderMain navigation={navigation} openDrawer={this.openDrawer} />
