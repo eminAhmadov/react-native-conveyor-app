@@ -10,7 +10,7 @@ const store = createStore(allReducers);
 const App = () => (
   <Provider store={store}>
     <View style={{flex: 1}}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <StatusBar hidden barStyle="light-content" />
       <Navigator
         initialRoute={{statusBarHidden: false}}
         renderScene={() => (

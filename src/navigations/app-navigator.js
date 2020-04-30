@@ -6,21 +6,23 @@ import {Icon} from 'native-base';
 import HomeScreen from '../scenes/home';
 import PostScreen from '../scenes/post';
 import SearchScreen from '../scenes/search';
+import colors from '../styles/colors';
 
 const TabNavigatorConfig = {
   initialRouteName: 'Home',
   header: null,
   headerMode: 'none',
   tabBarOptions: {
-    activeTintColor: 'orange', // Color of tab when pressed
-    inactiveTintColor: '#b5b5b5', // Color of tab when not pressed
+    activeTintColor: colors.ACCENT_COLOR, // Color of tab when pressed
+    inactiveTintColor: colors.ROUNDED_BUTTON_COLOR_DISABLED, // Color of tab when not pressed
     showIcon: 'true', // Shows an icon for both iOS and Android
     showLabel: 'true', //No label for Android
     labelStyle: {
       fontSize: 11,
     },
     style: {
-      backgroundColor: '#fff', // Makes Android tab bar white instead of standard blue
+      paddingTop: 2,
+      backgroundColor: colors.NAVIGATION_BAR_BACKGROUND_COLOR, // Makes Android tab bar white instead of standard blue
       height: Platform.OS === 'ios' ? 48 : 50, // I didn't use this in my app, so the numbers may be off.
     },
   },

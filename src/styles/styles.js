@@ -54,6 +54,7 @@ const styles = {
   },
   loginScreenMainView: {
     ...commonScreenMainViewLight,
+    backgroundColor: colors.BACKGROUND_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -90,6 +91,7 @@ const styles = {
   },
   registrationScreenMainView: {
     width: '100%',
+    backgroundColor: colors.BACKGROUND_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -228,7 +230,7 @@ const styles = {
     fontWeight: '600',
   },
   header: {
-    backgroundColor: colors.BACKGROUND_COLOR_LIGHT,
+    backgroundColor: colors.NAVIGATION_BAR_BACKGROUND_COLOR,
   },
   headerView: {
     zIndex: 30,

@@ -145,10 +145,10 @@ class LoginScreen extends Component {
               label="Email"
               value={email}
               autoCapitalize="none"
-              // activeColor={colors.INPUT_FIELD_ACTIVE}
-              // color={colors.INPUT_FIELD_TEXT}
-              // labelActiveColor={colors.INPUT_FIELD_INACTIVE}
-              // labelColor={colors.INPUT_FIELD_INACTIVE}
+              activeColor={colors.INPUT_FIELD_ACTIVE}
+              color={colors.INPUT_FIELD_TEXT}
+              labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+              labelColor={colors.INPUT_FIELD_INACTIVE}
               error={emailError}
               onChangeText={value => {
                 this.setState({
@@ -166,6 +166,10 @@ class LoginScreen extends Component {
               value={password}
               autoCapitalize="none"
               secureTextEntry={true}
+              activeColor={colors.INPUT_FIELD_ACTIVE}
+              color={colors.INPUT_FIELD_TEXT}
+              labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+              labelColor={colors.INPUT_FIELD_INACTIVE}
               error={passwordError}
               onChangeText={value => {
                 this.setState({

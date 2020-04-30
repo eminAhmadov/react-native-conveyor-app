@@ -4,6 +4,7 @@ import {Container, List, ListItem, Left, Body, Icon} from 'native-base';
 import {logOut} from '../../store/actions';
 import {connect} from 'react-redux';
 import styles from '../../styles/styles';
+import colors from '../../styles/colors';
 
 class Sidebar extends React.Component {
   logOut = () => {
@@ -16,7 +17,9 @@ class Sidebar extends React.Component {
     return (
       <Container style={styles.sidebarContainer}>
         <List>
-          <ListItem itemDivider>
+          <ListItem
+            itemDivider
+            style={{backgroundColor: colors.BACKGROUND_COLOR_LIGHT}}>
             <Text>App</Text>
           </ListItem>
           <ListItem button onPress={this.logOut}>

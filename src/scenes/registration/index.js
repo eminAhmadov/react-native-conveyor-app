@@ -263,7 +263,8 @@ class RegistrationScreen extends Component {
     } = this.state;
     const {navigation} = this.props;
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView
+        style={{backgroundColor: colors.BACKGROUND_COLOR}}>
         <View style={styles.registrationScreenMainView}>
           <View style={styles.registrationScreenContentView}>
             <Image
@@ -275,6 +276,10 @@ class RegistrationScreen extends Component {
               <Reinput
                 label="Frist Name"
                 value={firstName}
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={firstNameError}
                 onChangeText={value => {
                   this.setState({
@@ -290,6 +295,10 @@ class RegistrationScreen extends Component {
               <Reinput
                 label="Last Name"
                 value={lastName}
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={lastNameError}
                 onChangeText={value => {
                   this.setState({
@@ -313,12 +322,23 @@ class RegistrationScreen extends Component {
                 onChange={option => {
                   this.setState({gender: option.label});
                 }}>
-                <Reinput label="Gender" value={gender} />
+                <Reinput
+                  label="Gender"
+                  activeColor={colors.INPUT_FIELD_ACTIVE}
+                  color={colors.INPUT_FIELD_TEXT}
+                  labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                  labelColor={colors.INPUT_FIELD_INACTIVE}
+                  value={gender}
+                />
               </ModalSelector>
               <Reinput
                 label="Email"
                 value={email}
                 autoCapitalize="none"
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={emailError}
                 onChangeText={value => {
                   this.setState({
@@ -336,6 +356,10 @@ class RegistrationScreen extends Component {
                 value={password}
                 autoCapitalize="none"
                 secureTextEntry={true}
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={passwordError}
                 onChangeText={value => {
                   this.setState({
@@ -353,6 +377,10 @@ class RegistrationScreen extends Component {
                 value={confirmPassword}
                 autoCapitalize="none"
                 secureTextEntry={true}
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={confirmPasswordError}
                 onChangeText={value => {
                   this.setState({
@@ -369,6 +397,10 @@ class RegistrationScreen extends Component {
                 label="Facebook"
                 value={facebook}
                 autoCapitalize="none"
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={facebookError}
                 onChangeText={value => {
                   this.setState({
@@ -385,6 +417,10 @@ class RegistrationScreen extends Component {
                 label="Instagram"
                 value={instagram}
                 autoCapitalize="none"
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={instagramError}
                 onChangeText={value => {
                   this.setState({
@@ -401,6 +437,10 @@ class RegistrationScreen extends Component {
                 label="Mobile"
                 value={mobile}
                 keyboardType="phone-pad"
+                activeColor={colors.INPUT_FIELD_ACTIVE}
+                color={colors.INPUT_FIELD_TEXT}
+                labelActiveColor={colors.INPUT_FIELD_ACTIVE}
+                labelColor={colors.INPUT_FIELD_INACTIVE}
                 error={mobileError}
                 onChangeText={value => {
                   this.setState({
