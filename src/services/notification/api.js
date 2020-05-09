@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.1.102:8080';
+const API_BASE = 'http://192.168.1.102:8090';
 
 const api = {
   listAllNotifications(userId, offset, limit) {

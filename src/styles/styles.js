@@ -65,7 +65,8 @@ const styles = {
     justifyContent: 'space-between',
   },
   loginScreenLogoImage: {
-    width: '50%',
+    width: '80%',
+    height: '40%',
   },
   loginScreenInputsView: {
     width: '80%',
@@ -102,7 +103,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   registrationScreenLogoImageStyle: {
-    width: '50%',
+    width: '70%',
   },
   registrationScreenInputFieldsView: {
     width: '80%',
