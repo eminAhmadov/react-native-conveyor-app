@@ -7,7 +7,7 @@ import colors from '../../styles/colors';
 const LoadMore = ({
   isLoading = false,
   hasMoreToLoad = true,
-  onLoadPressed = {},
+  onLoadPressed = () => {},
 }) => (
   <View style={styles.loadMoreView}>
     {isLoading ? (

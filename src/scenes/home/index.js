@@ -20,8 +20,9 @@ export default class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
+    const {navigation} = this.props;
     this.fetchResult();
-    this.didFocusSubscription = this.props.navigation.addListener(
+    this.didFocusSubscription = navigation.addListener(
       'didFocus',
       this.didFocusAction,
     );
