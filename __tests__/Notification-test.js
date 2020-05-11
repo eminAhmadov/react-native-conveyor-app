@@ -9,6 +9,6 @@ import Notification from '../src/components/organisms/notification';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
-it('Load More renders correctly', () => {
+it('Notification renders correctly', () => {
   renderer.create(<Notification />);
 });
